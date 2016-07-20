@@ -22,7 +22,9 @@ public class Cell {
     }
 
     public static Cell createEmptyCell() {
-        return new Cell();
+        Cell cell = new Cell();
+        cell.state=EMPTY;
+        return cell;
     }
 
     public static Cell createCellWithShip(Ship ship) {

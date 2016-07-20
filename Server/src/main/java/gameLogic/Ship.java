@@ -19,7 +19,7 @@ public class Ship {
     }
 
     public boolean isAlive() {
-        return --alivePartOfShipLeft==0;
+        return (--alivePartOfShipLeft)!=0;
     }
 
 
