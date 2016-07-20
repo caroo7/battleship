@@ -1,5 +1,7 @@
 package gameLogic;
 
+import models.Ship;
+
 import java.awt.*;
 import java.util.Collections;
 import java.util.HashSet;

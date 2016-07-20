@@ -7,4 +7,5 @@ public class Config {
     static final String USER_BOARD_SERVICE = "/http/UserBoardService";
     static final String PLAYER_IDENTIFIER_SERVICE = "/http/PlayerRegistrationService";
 
+
 }

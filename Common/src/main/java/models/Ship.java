@@ -1,4 +1,4 @@
-package gameLogic;
+package models;
 
 
 import java.awt.*;

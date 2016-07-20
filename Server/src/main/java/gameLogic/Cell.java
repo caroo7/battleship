@@ -1,5 +1,7 @@
 package gameLogic;
 
+import models.Ship;
+
 import java.util.HashMap;
 import java.util.Map;
 

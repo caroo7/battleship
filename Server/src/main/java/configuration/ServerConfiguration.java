@@ -43,6 +43,14 @@ public class ServerConfiguration {
     }
 
     @Bean
+    public SimpleHttpInvokerServiceExporter shipGeneratorHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(ShipGeneratorService.class);
+        simpleHttpInvokerServiceExporter.setService(shipGeneratorService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
+    @Bean
     public UserBoardService userBoardService() {
         return new UserBoardServiceImpl();
     }
@@ -60,6 +68,11 @@ public class ServerConfiguration {
     @Bean
     public GameAvailableService gameAvailableService() {
         return new GameAvailableServiceImpl();
+    }
+
+    @Bean
+    public ShipGeneratorService shipGeneratorService() {
+        return new ShipGeneratorServiceImpl();
     }
 
 }

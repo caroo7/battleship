@@ -1,5 +1,6 @@
 package gameLogic;
 
+import models.Ship;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
