@@ -37,8 +37,8 @@ public class ServerConfiguration {
     @Bean
     public SimpleHttpInvokerServiceExporter playerIdentifierHttpInvokerServiceExporter() {
         SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(PlayerIdentifierService.class);
-        simpleHttpInvokerServiceExporter.setService(playerIdentifierService());
+        simpleHttpInvokerServiceExporter.setServiceInterface(PlayerRegistrationService.class);
+        simpleHttpInvokerServiceExporter.setService(playerRegistrationService());
         return simpleHttpInvokerServiceExporter;
     }
 
@@ -48,13 +48,18 @@ public class ServerConfiguration {
     }
 
     @Bean
-    public PlayerIdentifierService playerIdentifierService() {
-        return new PlayerIdentifierServiceImpl();
+    public PlayerRegistrationService playerRegistrationService() {
+        return new PlayerRegistrationServiceImpl();
     }
 
     @Bean
     public ActualPlayerService actualPlayerService() {
         return new ActualPlayerServiceImpl();
+    }
+
+    @Bean
+    public GameAvailableService gameAvailableService() {
+        return new GameAvailableServiceImpl();
     }
 
 }

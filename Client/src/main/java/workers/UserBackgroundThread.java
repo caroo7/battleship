@@ -15,7 +15,7 @@ public class UserBackgroundThread {
 
     private static final long THREAD_INTERVAL = 100l;
 
-    // Player should be identified already by UserPanelController (using PlayerIdentifierService)
+    // Player should be identified already by UserPanelController (using PlayerRegistrationService)
     // and also game should be initialized using the same controller (GameInitializerService) - using player and set of ships
     public void execute(Player player) {
 

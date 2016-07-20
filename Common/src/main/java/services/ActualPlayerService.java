@@ -4,10 +4,8 @@ import models.Player;
 
 public interface ActualPlayerService {
 
-    void initializePlayer(Player player);
+    void setActualPlayer(Player player);
 
     boolean isActualPlayer(Player player);
-
-    void changeActualPlayer();
 
 }

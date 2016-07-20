@@ -7,7 +7,7 @@ public class ActualPlayerServiceImpl implements ActualPlayerService {
     private Player actualPlayer;
 
     @Override
-    public void initializePlayer(Player player) {
+    public void setActualPlayer(Player player) {
         this.actualPlayer = player;
     }
 
@@ -16,9 +16,5 @@ public class ActualPlayerServiceImpl implements ActualPlayerService {
         return player == this.actualPlayer;
     }
 
-    @Override
-    public void changeActualPlayer() {
-        actualPlayer = (actualPlayer == Player.USER) ? Player.OPPONENT : Player.USER;
-    }
 
 }

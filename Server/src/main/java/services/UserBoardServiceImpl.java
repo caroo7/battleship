@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserBoardServiceImpl implements UserBoardService {
 
     @Autowired
-    PlayerIdentifierService playerIdentifierService;
+    GameAvailableService gameAvailableService;
 
     @Autowired
     ActualPlayerService actualPlayerService;
@@ -15,7 +15,7 @@ public class UserBoardServiceImpl implements UserBoardService {
     @Override
     public UserBoardMessage retrieveDataForUser(Player player) {
 
-        boolean isGameAvailable = playerIdentifierService.isGameAvailable();
+        boolean isGameAvailable = gameAvailableService.isGameAvailable();
 
         boolean isYourTurn = actualPlayerService.isActualPlayer(player);
 
@@ -23,4 +23,5 @@ public class UserBoardServiceImpl implements UserBoardService {
 
         return new UserBoardMessage(isGameAvailable, isYourTurn);
     }
+
 }
