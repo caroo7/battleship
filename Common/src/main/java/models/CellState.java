@@ -1,4 +1,4 @@
-package gameLogic;
+package models;
 
 import java.awt.*;
 
@@ -10,5 +10,9 @@ public enum CellState {
 
     CellState (Color color){
         this.color = color;
+    }
+
+    public Color getColor(){
+        return color;
     }
 }

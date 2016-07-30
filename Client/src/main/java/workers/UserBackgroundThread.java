@@ -1,9 +1,10 @@
 package workers;
 
+import gui.services.Publisher;
 import models.Player;
-import models.UserBoardMessage;
+import models.BoardsMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import services.UserBoardService;
+import services.shared.BoardsMessageService;
 
 import javax.swing.*;
 import java.util.List;
@@ -11,32 +12,44 @@ import java.util.List;
 public class UserBackgroundThread {
 
     @Autowired
-    private UserBoardService userBoardService;
+    private BoardsMessageService boardsMessageService;
 
-    private static final long THREAD_INTERVAL = 100l;
+    @Autowired
+    private Publisher userBoardPublisher;
 
-    // Player should be identified already by UserPanelController (using PlayerRegistrationService)
-    // and also game should be initialized using the same controller (GameInitializerService) - using player and set of ships
+    @Autowired
+    Publisher rivalBoardPublisher;
+
+    private static final long THREAD_INTERVAL = 5000L;
+
     public void execute(Player player) {
-
-        SwingWorker<Void, UserBoardMessage> backgroundThread = new SwingWorker<Void, UserBoardMessage>() {
+        SwingWorker<Void, BoardsMessage> backgroundThread = new SwingWorker<Void, BoardsMessage>() {
 
             @Override
             protected Void doInBackground() throws Exception {
                 while(true) {
-                    publish(userBoardService.retrieveDataForUser(player));
                     try {
+                        publish(boardsMessageService.retrieveDataForUser(player));
                         Thread.sleep(THREAD_INTERVAL);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        // display some error in GUI using controller?
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        // display error in GUI
                     }
                 }
             }
 
             @Override
-            protected void process(List<UserBoardMessage> chunks) {
-                // notify GUI using UserPanelController (actual element is: chunks.get(chunks.size() - 1))
+            protected void process(List<BoardsMessage> chunks) {
+                BoardsMessage actualMessage = chunks.get(chunks.size() - 1);
+
+                System.out.println("is game available: " + actualMessage.isGameAvailable());
+                System.out.println("is Your Turn: " + actualMessage.isYourTurn());
+                System.out.println("user actual board state: " + actualMessage.getActualUserBoardStates());
+                System.out.println("rival actual board state: " + actualMessage.getActualRivalBoardState());
+                System.out.println("rival ships left number: " + actualMessage.getRivalShipsLeft());
+                System.out.println("******************************************************************");
+
+                userBoardPublisher.notifyAllSubscribers(actualMessage);
             }
         };
 

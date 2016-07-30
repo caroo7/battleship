@@ -1,5 +1,5 @@
 package models;
 
 public enum Player {
-    USER, OPPONENT;
+    FIRST, SECOND
 }

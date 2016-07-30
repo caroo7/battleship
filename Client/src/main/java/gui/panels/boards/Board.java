@@ -1,4 +1,5 @@
 package gui.panels.boards;
+
 import gui.services.GameState;
 import gui.services.Publisher;
 import gui.services.Subscriber;
@@ -9,17 +10,24 @@ import java.awt.*;
 
 abstract class Board extends JPanel implements Subscriber {
 
-    PlayingArea playingArea=new PlayingArea();
+    private PlayingArea playingArea = new PlayingArea();
 
     abstract Board addTitles();
-    Board addListeners(){return this;}
-    Board setBelowPanel(GameState gameState){return this;}
-    Board(){
-         setLayout(new BorderLayout());
-         add(playingArea,BorderLayout.CENTER);
+
+    Board addListeners() {
+        return this;
     }
 
-     Board addSubscription(Publisher publisher){
+    Board setBelowPanel(GameState gameState) {
+        return this;
+    }
+
+    Board() {
+        setLayout(new BorderLayout());
+        add(playingArea, BorderLayout.CENTER);
+    }
+
+    Board addSubscription(Publisher publisher) {
         publisher.subscribe(this);
         return this;
     }

@@ -2,10 +2,11 @@ package models;
 
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
-public class Ship {
+public class Ship implements Serializable {
 
     private Set<Point> coordinates;
     private Set<Point> neighbours;
@@ -19,19 +20,22 @@ public class Ship {
     }
 
     public boolean isAlive() {
-        return (--alivePartOfShipLeft)!=0;
+        return alivePartOfShipLeft !=0;
     }
 
+    void reduceShipParts() {
+        alivePartOfShipLeft--;
+    }
 
-    public Set<Point> getCoordinates() {
+    Set<Point> getCoordinates() {
         return Collections.unmodifiableSet(coordinates);
     }
 
-    public Set<Point> getNeighbours() {
+    Set<Point> getNeighbours() {
         return Collections.unmodifiableSet(neighbours);
     }
 
-    public boolean containsPoint(Point point) {
+    boolean containsPoint(Point point) {
         return coordinates.contains(point);
     }
 

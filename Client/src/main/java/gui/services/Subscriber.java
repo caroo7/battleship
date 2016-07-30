@@ -1,6 +1,8 @@
 package gui.services;
 
+import models.BoardsMessage;
+
 public interface Subscriber {
 
-    void update(DataObject dataObject);
+    void update(BoardsMessage dataObject);
 }

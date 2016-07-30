@@ -1,5 +1,6 @@
-package gameLogic;
+package models;
 
+import models.Cell;
 import models.Ship;
 
 import java.awt.*;
@@ -8,9 +9,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BoardInitializer {
+class BoardInitializer {
 
-    public static Map<Point, Cell> initBoard(Set<Ship> ships) {
+    static Map<Point, Cell> initBoard(Set<Ship> ships) {
         Map<Point, Cell> result = new HashMap<>();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {

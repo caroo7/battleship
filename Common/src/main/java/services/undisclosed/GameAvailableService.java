@@ -1,4 +1,4 @@
-package services;
+package services.undisclosed;
 
 public interface GameAvailableService {
 

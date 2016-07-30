@@ -1,6 +1,6 @@
 package gui.panels.boards;
 
-import gui.services.BoardElementState;
+import models.CellState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +12,17 @@ class PlayingArea extends JPanel {
     final static int height = 320;
     final static int size = 8;
 
-    Map<Point, BoardElementState> boardState = new HashMap<>();
+    private Map<Point, CellState> boardState = new HashMap<>();
 
     PlayingArea(){
         setEmptyBoard();
     }
 
-    final void setEmptyBoard() {
+    private void setEmptyBoard() {
         setSize(new Dimension(weight, height));
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                boardState.put(new Point(i, j), BoardElementState.EMPTY);
+                boardState.put(new Point(i, j), CellState.EMPTY);
             }
         }
         repaint();

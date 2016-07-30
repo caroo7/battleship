@@ -1,4 +1,4 @@
-package services;
+package services.shared;
 
 import models.Ship;
 

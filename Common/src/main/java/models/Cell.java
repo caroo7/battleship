@@ -1,15 +1,13 @@
-package gameLogic;
+package models;
 
-import models.Ship;
+import static models.CellState.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static gameLogic.CellState.*;
-
 public class Cell {
 
-    protected CellState state;
+    private CellState state;
     private Map<CellState, CellState> rulesOfChangingState;
 
     {
@@ -25,7 +23,7 @@ public class Cell {
 
     public static Cell createEmptyCell() {
         Cell cell = new Cell();
-        cell.state=EMPTY;
+        cell.state = EMPTY;
         return cell;
     }
 
@@ -38,9 +36,20 @@ public class Cell {
 
     public CellState shoot() {
         this.state = rulesOfChangingState.get(state);
-        if (state == SHOOTEDSHIP && !myShip.isAlive()) {
-            state = SUNK;
+        if (state == SHOOTEDSHIP) {
+            myShip.reduceShipParts();
+            if (!myShip.isAlive()) {
+                state = SUNK;
+            }
         }
+        return state;
+    }
+
+    void setState(CellState state) {
+        this.state = state;
+    }
+
+    CellState getState() {
         return state;
     }
 }

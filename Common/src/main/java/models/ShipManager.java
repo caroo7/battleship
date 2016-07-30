@@ -1,37 +1,40 @@
-package gameLogic;
+package models;
 
 import models.Ship;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ShipManager {
+public class ShipManager implements Serializable {
 
     private Set<Ship> ships;
 
-    // initialize somehow this manager
+    public void initShips(Set<Ship> ships) {
+        this.ships = ships;
+    }
 
-    public Set<Point> getPointsAroundSunkShip(Point point) {
+    Set<Point> getPointsAroundSunkShip(Point point) {
         Set<Point> aroundSunkCells = new HashSet<>();
         ships.stream().filter(ship -> ship.containsPoint(point)).forEach(ship -> ship.getNeighbours()
-                .stream().forEach(coordinate -> aroundSunkCells.add(coordinate)));
+                .stream().forEach(aroundSunkCells::add));
         return aroundSunkCells;
     }
 
-    public Set<Point> getPointsOfSunkShip(Point point) {
+    Set<Point> getPointsOfSunkShip(Point point) {
         Set<Point> sunkCells = new HashSet<>();
         ships.stream().filter(ship -> ship.containsPoint(point)).forEach(ship -> ship.getCoordinates()
-                .stream().forEach(coordinate -> sunkCells.add(coordinate)));
+                .stream().forEach(sunkCells::add));
         return sunkCells;
     }
 
     public long getAmountOfLeftShips() {
-        return ships.stream().filter(ship -> ship.isAlive()).count();
+        return ships.stream().filter(Ship::isAlive).count();
     }
 
-    public Set<Ship> getAllShips() {
+    Set<Ship> getAllShips() {
         return Collections.unmodifiableSet(ships);
     }
 }

@@ -1,11 +1,14 @@
 package configuration;
 
-public class Config {
+class Config {
 
     static final String HOST_NAME = "127.0.0.1";
     static final int SERVER_PORT = 8088;
-    static final String USER_BOARD_SERVICE = "/http/UserBoardService";
-    static final String PLAYER_IDENTIFIER_SERVICE = "/http/PlayerRegistrationService";
+    static final String SHIP_GENERATOR_SERVICE = "/http/ShipGeneratorService";
+    static final String BOARD_MESSAGE_SERVICE = "/http/BoardsMessageService";
+    static final String PLAYER_REGISTRATION_SERVICE = "/http/PlayerRegistrationService";
+    static final String GAME_INIT_SERVICE = "/http/GameInitService";
+    static final String SHOOT_SERVICE = "/http/ShootService";
 
 
 }

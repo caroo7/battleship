@@ -1,11 +1,13 @@
 package configuration;
 
 import com.sun.net.httpserver.HttpHandler;
+import models.Board;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerServiceExporter;
 import org.springframework.remoting.support.SimpleHttpServerFactoryBean;
-import services.*;
+import services.shared.*;
+import services.undisclosed.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,23 +21,26 @@ public class ServerConfiguration {
         httpServerFactoryBean.setPort(Config.SERVER_PORT);
 
         Map<String, HttpHandler> httpHandlers = new HashMap<>();
-        httpHandlers.put(Config.USER_BOARD_SERVICE, userBoardHttpInvokerServiceExporter());
-        httpHandlers.put(Config.PLAYER_IDENTIFIER_SERVICE, playerIdentifierHttpInvokerServiceExporter());
+        httpHandlers.put(Config.SHIP_GENERATOR_SERVICE, shipGeneratorHttpInvokerServiceExporter());
+        httpHandlers.put(Config.BOARD_MESSAGE_SERVICE, boardMessageHttpInvokerServiceExporter());
+        httpHandlers.put(Config.PLAYER_REGISTRATION_SERVICE, playerRegistrationHttpInvokerServiceExporter());
+        httpHandlers.put(Config.GAME_INIT_SERVICE, gameInitHttpInvokerServiceExporter());
+        httpHandlers.put(Config.SHOOT_SERVICE, shootServiceHttpInvokerServiceExporter());
         httpServerFactoryBean.setContexts(httpHandlers);
 
         return httpServerFactoryBean;
     }
 
     @Bean
-    public SimpleHttpInvokerServiceExporter userBoardHttpInvokerServiceExporter() {
+    public SimpleHttpInvokerServiceExporter boardMessageHttpInvokerServiceExporter() {
         SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(UserBoardService.class);
-        simpleHttpInvokerServiceExporter.setService(userBoardService());
+        simpleHttpInvokerServiceExporter.setServiceInterface(BoardsMessageService.class);
+        simpleHttpInvokerServiceExporter.setService(boardMessageService());
         return simpleHttpInvokerServiceExporter;
     }
 
     @Bean
-    public SimpleHttpInvokerServiceExporter playerIdentifierHttpInvokerServiceExporter() {
+    public SimpleHttpInvokerServiceExporter playerRegistrationHttpInvokerServiceExporter() {
         SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
         simpleHttpInvokerServiceExporter.setServiceInterface(PlayerRegistrationService.class);
         simpleHttpInvokerServiceExporter.setService(playerRegistrationService());
@@ -51,8 +56,24 @@ public class ServerConfiguration {
     }
 
     @Bean
-    public UserBoardService userBoardService() {
-        return new UserBoardServiceImpl();
+    public SimpleHttpInvokerServiceExporter gameInitHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(GameInitService.class);
+        simpleHttpInvokerServiceExporter.setService(gameInitService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
+    @Bean
+    public SimpleHttpInvokerServiceExporter shootServiceHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(ShootService.class);
+        simpleHttpInvokerServiceExporter.setService(shootService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
+    @Bean
+    public BoardsMessageService boardMessageService() {
+        return new BoardsMessageServiceImpl();
     }
 
     @Bean
@@ -73,6 +94,36 @@ public class ServerConfiguration {
     @Bean
     public ShipGeneratorService shipGeneratorService() {
         return new ShipGeneratorServiceImpl();
+    }
+
+    @Bean
+    public BoardStateService boardStateService() {
+        return new BoardStateServiceImpl();
+    }
+
+    @Bean
+    public GameInitService gameInitService() {
+        return new GameInitServiceImpl();
+    }
+
+    @Bean
+    public ShootService shootService() {
+        return new ShootServiceImpl();
+    }
+
+    @Bean
+    public AliveShipsService aliveShipsService() {
+        return new AliveShipsServiceImpl();
+    }
+
+    @Bean
+    public Board firstPlayerBoard() {
+        return new Board();
+    }
+
+    @Bean
+    public Board secondPlayerBoard() {
+        return new Board();
     }
 
 }

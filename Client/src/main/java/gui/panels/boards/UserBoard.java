@@ -1,16 +1,19 @@
 package gui.panels.boards;
 
 import gui.panels.boards.belowPanels.UserBelowPanel;
-import gui.services.DataObject;
 import gui.services.GameState;
+import models.BoardsMessage;
+import models.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
-class UserBoard extends Board {
+public class UserBoard extends Board {
 
+    private final Player user = Player.FIRST;
 
     @Override
-    public void update(DataObject dataObject) {
+    public void update(BoardsMessage boardsMessage) {
          //TODO
 
     }

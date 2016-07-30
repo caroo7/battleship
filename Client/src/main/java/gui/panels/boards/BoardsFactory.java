@@ -3,29 +3,51 @@ package gui.panels.boards;
 import gui.services.BoardPanelType;
 import gui.services.GameState;
 import gui.services.Publisher;
-import gui.services.PublisherExample;
+import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.BoardsMessageService;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BoardsFactory {
-    private Map<BoardPanelType,JPanel> boards=new HashMap<>();
-    private Publisher userBoardPublisher = new PublisherExample();
-    private Publisher rivalBoardPublisher = new PublisherExample();
 
+    @Autowired
+    private BoardsMessageService boardsMessageService;
 
-    public BoardsFactory() {initBoardsMap();}
+    @Autowired
+    private UserBoard userBoard;
 
-     public JPanel getBoardPanel(BoardPanelType boardPanelType){return boards.getOrDefault(boardPanelType,new JPanel());}
+    @Autowired
+    private RivalBoard rivalBoard;
 
-       private void initBoardsMap(){boards.put(BoardPanelType.Playing,createPlayingBoard());}
+    @Autowired
+    private Publisher userBoardPublisher;
 
-       private JPanel createPlayingBoard(){
-           JPanel playingBoard = new JPanel(new GridLayout(1,2));
-           playingBoard.add(new UserBoard().addSubscription(userBoardPublisher).addTitles().setBelowPanel(GameState.YourTurn));
-           playingBoard.add(new RivalBoard().addSubscription(rivalBoardPublisher).addTitles().addListeners());
-           return playingBoard;
-       }
+    @Autowired
+    private Publisher rivalBoardPublisher;
+
+    private Map<BoardPanelType, JPanel> boards = new HashMap<>();
+
+    @PostConstruct
+    public void boardFactoryInitialize() {
+        initBoardsMap();
+    }
+
+    public JPanel getBoardPanel(BoardPanelType boardPanelType) {
+        return boards.getOrDefault(boardPanelType, new JPanel());
+    }
+
+    private void initBoardsMap() {
+        boards.put(BoardPanelType.Playing, createPlayingBoard());
+    }
+
+    private JPanel createPlayingBoard() {
+        JPanel playingBoard = new JPanel(new GridLayout(1, 2));
+        playingBoard.add(userBoard.addSubscription(userBoardPublisher).addTitles().setBelowPanel(GameState.YourTurn));
+        playingBoard.add(rivalBoard.addSubscription(rivalBoardPublisher).addTitles().addListeners());
+        return playingBoard;
+    }
 }

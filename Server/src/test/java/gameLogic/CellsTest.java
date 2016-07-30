@@ -1,5 +1,7 @@
 package gameLogic;
 
+import models.Cell;
+import models.CellState;
 import models.Ship;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -11,7 +13,7 @@ import java.util.Set;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
-import static gameLogic.CellState.*;
+import static models.CellState.*;
 
 public class CellsTest {
 
@@ -40,10 +42,10 @@ public class CellsTest {
         // given
         Cell cellToBeSunk = Cell.createCellWithShip(createMockSunkShip());
 
-        //when
+        // when
         CellState sunkCell = cellToBeSunk.shoot();
 
-        //then
+        // then
         assertEquals(sunkCell, SUNK);
     }
 
