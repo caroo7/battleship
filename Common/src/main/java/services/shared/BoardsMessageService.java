@@ -5,6 +5,6 @@ import models.BoardsMessage;
 
 public interface BoardsMessageService {
 
-    BoardsMessage retrieveDataForUser(Player player) throws Exception;
+    BoardsMessage retrieveDataForUser(Player player);
 
 }

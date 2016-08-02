@@ -8,8 +8,6 @@ public interface PlayerRegistrationService {
 
     Player registerPlayer() throws Exception;
 
-    void unregisterPlayer();
-
     int getConnectedPlayersNumber();
 
 }

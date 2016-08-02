@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface ShootService {
 
-    Map<Point, CellState> shootOn(Point point);
+    void shootOn(Point point);
 
 }

@@ -7,14 +7,14 @@ import java.awt.*;
 public final class BoardsMessage implements Serializable {
 
     private boolean isGameAvailable;
-    private boolean isYourTurn;
+    private GameState gameState;
     private Map<Point, CellState> actualUserBoardStates;
     private Map<Point, CellState> actualRivalBoardState;
     private long rivalShipsLeft;
 
-    public BoardsMessage(boolean isGameAvailable, boolean isYourTurn, Map<Point, CellState> actualUserBoardStates, Map<Point, CellState> actualRivalBoardState, long rivalShipsLeft) {
+    public BoardsMessage(boolean isGameAvailable, GameState gameState, Map<Point, CellState> actualUserBoardStates, Map<Point, CellState> actualRivalBoardState, long rivalShipsLeft) {
         this.isGameAvailable = isGameAvailable;
-        this.isYourTurn = isYourTurn;
+        this.gameState = gameState;
         this.actualUserBoardStates = actualUserBoardStates;
         this.actualRivalBoardState = actualRivalBoardState;
         this.rivalShipsLeft = rivalShipsLeft;
@@ -24,8 +24,8 @@ public final class BoardsMessage implements Serializable {
         return isGameAvailable;
     }
 
-    public boolean isYourTurn() {
-        return isYourTurn;
+    public GameState getGameState() {
+        return gameState;
     }
 
     public Map<Point, CellState> getActualUserBoardStates() {

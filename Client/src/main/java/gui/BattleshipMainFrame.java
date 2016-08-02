@@ -4,7 +4,6 @@ import gui.panels.boards.BoardsFactory;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.services.BoardPanelType;
 import org.springframework.beans.factory.annotation.Autowired;
-import services.shared.PlayerRegistrationService;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
@@ -20,11 +19,15 @@ public class BattleshipMainFrame {
     @Autowired
     private ButtonsPanelFactory buttonsPanelFactory;
 
-    // TODO this shouldn't be here!!!
-    @Autowired
-    private PlayerRegistrationService registrationService;
-
     private JFrame battleshipMainFrame = new JFrame();
+
+    private WindowAdapter windowAdapter = new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent event) {
+            //registrationService.unregisterPlayer();
+            event.getWindow().dispose();
+        }
+    };
 
     @PostConstruct
     public void show() {
@@ -40,9 +43,9 @@ public class BattleshipMainFrame {
         battleshipMainFrame.setLayout(new BorderLayout());
         battleshipMainFrame.setResizable(false);
         battleshipMainFrame.setLocationRelativeTo(null);
+        battleshipMainFrame.addWindowListener(windowAdapter);
         battleshipMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        addRunAwayPlayerListener();
     }
 
     private void addBoardsPanel() {
@@ -55,17 +58,5 @@ public class BattleshipMainFrame {
 
     private void setVisibleAfterFrameCreation() {
         battleshipMainFrame.setVisible(true);
-    }
-
-
-    // TODO this shouldn't be here!!!
-    private void addRunAwayPlayerListener() {
-        battleshipMainFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent event) {
-                registrationService.unregisterPlayer();
-                event.getWindow().dispose();
-            }
-        });
     }
 }

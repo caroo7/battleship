@@ -27,11 +27,6 @@ public class PlayerRegistrationServiceImpl implements PlayerRegistrationService 
     }
 
     @Override
-    public void unregisterPlayer() {
-        connectedPlayersCounter--;
-    }
-
-    @Override
     public int getConnectedPlayersNumber() {
         return connectedPlayersCounter;
     }

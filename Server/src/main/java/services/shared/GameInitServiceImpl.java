@@ -15,7 +15,7 @@ public class GameInitServiceImpl implements GameInitService {
 
     @Override
     public void initGame(Player player, ShipManager shipManager) {
-        Board actualBoard = player == Player.FIRST ? firstPlayerBoard : secondPlayerBoard;
+        Board actualBoard = ((player == Player.FIRST) ? firstPlayerBoard : secondPlayerBoard);
         actualBoard.init(shipManager);
     }
 }

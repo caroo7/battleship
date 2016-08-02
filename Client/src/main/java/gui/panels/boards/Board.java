@@ -1,6 +1,6 @@
 package gui.panels.boards;
 
-import gui.services.GameState;
+import models.GameState;
 import gui.services.Publisher;
 import gui.services.Subscriber;
 
@@ -10,7 +10,7 @@ import java.awt.*;
 
 abstract class Board extends JPanel implements Subscriber {
 
-    private PlayingArea playingArea = new PlayingArea();
+    PlayingArea playingArea = new PlayingArea();
 
     abstract Board addTitles();
 

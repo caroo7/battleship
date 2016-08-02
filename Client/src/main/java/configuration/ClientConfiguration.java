@@ -4,9 +4,12 @@ import gui.BattleshipMainFrame;
 import gui.panels.boards.BoardsFactory;
 import gui.panels.boards.RivalBoard;
 import gui.panels.boards.UserBoard;
+import gui.panels.boards.belowPanels.BelowPanelsFactory;
+import gui.panels.boards.belowPanels.BelowPanelsListenerFactory;
+import gui.panels.boards.belowPanels.UserBelowPanel;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.panels.buttons.ListenersFactory;
-import gui.services.PublisherConcrete;
+import gui.services.Publisher;
 import models.ShipManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,18 +56,34 @@ public class ClientConfiguration {
     }
 
     @Bean
-    public PublisherConcrete userBoardPublisher() {
-        return new PublisherConcrete();
+    public Publisher boardPublisher() {
+        return new Publisher();
     }
 
-    @Bean
-    public PublisherConcrete rivalBoardPublisher() {
-        return new PublisherConcrete();
-    }
 
     @Bean
     public ShipManager shipManager() {
         return new ShipManager();
+    }
+
+    @Bean
+    public UserBelowPanel belowPanel() {
+        return new UserBelowPanel();
+    }
+
+    @Bean
+    public BelowPanelsListenerFactory belowPanelsListenerFactory() {
+        return new BelowPanelsListenerFactory();
+    }
+
+    @Bean
+    public BelowPanelsFactory belowPanelsFactory() {
+        return new BelowPanelsFactory();
+    }
+
+    @Bean
+    public UserBelowPanel userBelowPanel() {
+        return new UserBelowPanel();
     }
 
     @Bean
@@ -108,6 +127,15 @@ public class ClientConfiguration {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
         String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.SHOOT_SERVICE;
         httpInvoker.setServiceInterface(ShootService.class);
+        httpInvoker.setServiceUrl(serviceURL);
+        return httpInvoker;
+    }
+
+    @Bean
+    public HttpInvokerProxyFactoryBean gameStateServiceHttpInvokerProxyFactoryBean() {
+        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
+        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.GAME_STATE_SERVICE;
+        httpInvoker.setServiceInterface(GameStateService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }

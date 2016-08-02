@@ -9,6 +9,6 @@ class Config {
     static final String PLAYER_REGISTRATION_SERVICE = "/http/PlayerRegistrationService";
     static final String GAME_INIT_SERVICE = "/http/GameInitService";
     static final String SHOOT_SERVICE = "/http/ShootService";
-
+    static final String GAME_STATE_SERVICE = "/http/GameStateService";
 
 }
