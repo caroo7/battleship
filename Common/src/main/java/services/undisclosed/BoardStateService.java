@@ -1,6 +1,6 @@
 package services.undisclosed;
 
-import models.CellState;
+import gameLogic.CellState;
 import models.Player;
 
 import java.awt.*;

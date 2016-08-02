@@ -1,6 +1,6 @@
 package services.undisclosed;
 
-import models.Board;
+import gameLogic.Board;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 

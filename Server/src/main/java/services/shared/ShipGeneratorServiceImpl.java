@@ -1,7 +1,6 @@
 package services.shared;
 
-import models.Ship;
-import services.shared.ShipGeneratorService;
+import gameLogic.Ship;
 
 import java.awt.*;
 import java.util.Collections;

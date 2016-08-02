@@ -1,10 +1,9 @@
 package services.shared;
 
-import models.CellState;
+import gameLogic.CellState;
 import models.Player;
 import models.BoardsMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import services.shared.BoardsMessageService;
 import services.undisclosed.ActualPlayerService;
 import services.undisclosed.AliveShipsService;
 import services.undisclosed.BoardStateService;

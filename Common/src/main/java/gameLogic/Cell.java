@@ -1,6 +1,6 @@
-package models;
+package gameLogic;
 
-import static models.CellState.*;
+import static gameLogic.CellState.*;
 
 import java.util.HashMap;
 import java.util.Map;

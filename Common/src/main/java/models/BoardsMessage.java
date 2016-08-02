@@ -1,5 +1,7 @@
 package models;
 
+import gameLogic.CellState;
+
 import java.io.Serializable;
 import java.util.Map;
 import java.awt.*;

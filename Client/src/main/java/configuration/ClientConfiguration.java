@@ -7,7 +7,7 @@ import gui.panels.boards.UserBoard;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.panels.buttons.ListenersFactory;
 import gui.services.PublisherConcrete;
-import models.ShipManager;
+import gameLogic.ShipManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;

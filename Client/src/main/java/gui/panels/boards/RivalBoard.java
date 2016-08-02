@@ -1,7 +1,7 @@
 package gui.panels.boards;
 
 import models.BoardsMessage;
-import models.CellState;
+import gameLogic.CellState;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.shared.ShootService;
 

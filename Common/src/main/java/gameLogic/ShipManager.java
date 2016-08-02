@@ -1,6 +1,4 @@
-package models;
-
-import models.Ship;
+package gameLogic;
 
 import java.awt.*;
 import java.io.Serializable;

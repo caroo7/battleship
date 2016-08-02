@@ -1,7 +1,7 @@
 package services.shared;
 
-import models.Board;
-import models.CellState;
+import gameLogic.Board;
+import gameLogic.CellState;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.undisclosed.ActualPlayerService;

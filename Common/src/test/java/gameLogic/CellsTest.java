@@ -1,19 +1,14 @@
 package gameLogic;
 
-import models.Cell;
-import models.CellState;
-import models.Ship;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
-import static models.CellState.*;
+import static gameLogic.CellState.*;
 
 public class CellsTest {
 
@@ -21,7 +16,7 @@ public class CellsTest {
     public void checkShootedCells() {
 
         // given
-        Cell cellWithShip = Cell.createCellWithShip(createShip());
+        Cell cellWithShip = Cell.createCellWithShip(ShipsUtility.createShipWithoutNeighbours(new Point(0,0), new Point(0,1)));
         Cell emptyCell = Cell.createEmptyCell();
 
         // when
@@ -37,7 +32,7 @@ public class CellsTest {
     }
 
     @Test
-    public void checkCellOfSinkedShip() {
+    public void checkCellOfSunkShip() {
 
         // given
         Cell cellToBeSunk = Cell.createCellWithShip(createMockSunkShip());
@@ -49,12 +44,7 @@ public class CellsTest {
         assertEquals(sunkCell, SUNK);
     }
 
-    private Ship createShip() {
-        Set<Point> coordinates = new HashSet<>();
-        coordinates.add(new Point(0, 0));
-        coordinates.add(new Point(0, 1));
-        return new Ship(coordinates, null);
-    }
+
 
     private Ship createMockSunkShip() {
         Ship ship = mock(Ship.class);

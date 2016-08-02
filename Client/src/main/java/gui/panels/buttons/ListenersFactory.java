@@ -1,8 +1,8 @@
 package gui.panels.buttons;
 
 import models.Player;
-import models.Ship;
-import models.ShipManager;
+import gameLogic.Ship;
+import gameLogic.ShipManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.shared.GameInitService;
 import services.shared.PlayerRegistrationService;

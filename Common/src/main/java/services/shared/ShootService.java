@@ -1,6 +1,6 @@
 package services.shared;
 
-import models.CellState;
+import gameLogic.CellState;
 
 import java.awt.*;
 import java.util.Map;
