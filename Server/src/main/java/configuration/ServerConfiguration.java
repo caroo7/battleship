@@ -27,6 +27,7 @@ public class ServerConfiguration {
         httpHandlers.put(Config.GAME_INIT_SERVICE, gameInitHttpInvokerServiceExporter());
         httpHandlers.put(Config.SHOOT_SERVICE, shootServiceHttpInvokerServiceExporter());
         httpHandlers.put(Config.GAME_STATE_SERVICE,gameStateServiceHttpInvokerServiceExporter());
+        httpHandlers.put(Config.END_GAME_SERVICE, endGameServiceHttpInvokerServiceExporter());
         httpServerFactoryBean.setContexts(httpHandlers);
 
         return httpServerFactoryBean;
@@ -79,6 +80,15 @@ public class ServerConfiguration {
         simpleHttpInvokerServiceExporter.setService(gameStateService());
         return simpleHttpInvokerServiceExporter;
     }
+
+    @Bean
+    public SimpleHttpInvokerServiceExporter endGameServiceHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(EndGameService.class);
+        simpleHttpInvokerServiceExporter.setService(endGameService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
     @Bean
     public BoardsMessageService boardMessageService() {
         return new BoardsMessageServiceImpl();
@@ -128,6 +138,11 @@ public class ServerConfiguration {
     @Bean
     public GameStateService gameStateService() {
         return new GameStateServiceImpl();
+    }
+
+    @Bean
+    public EndGameService endGameService() {
+        return new EndGameServiceImpl();
     }
 
     @Bean

@@ -139,4 +139,14 @@ public class ClientConfiguration {
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
+
+    @Bean
+    public HttpInvokerProxyFactoryBean endGameServiceHttpInvokerProxyFactoryBean() {
+        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
+        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.END_GAME_SERVICE;
+        httpInvoker.setServiceInterface(EndGameService.class);
+        httpInvoker.setServiceUrl(serviceURL);
+        return httpInvoker;
+    }
+
 }

@@ -10,4 +10,8 @@ public interface PlayerRegistrationService {
 
     int getConnectedPlayersNumber();
 
+    void unregisterPlayer();
+
+    void unregisterBothPlayers();
+
 }

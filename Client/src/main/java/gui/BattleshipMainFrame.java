@@ -4,6 +4,7 @@ import gui.panels.boards.BoardsFactory;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.services.BoardPanelType;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.PlayerRegistrationService;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
@@ -19,13 +20,16 @@ public class BattleshipMainFrame {
     @Autowired
     private ButtonsPanelFactory buttonsPanelFactory;
 
+    @Autowired
+    private PlayerRegistrationService registrationService;
+
     private JFrame battleshipMainFrame = new JFrame();
 
     private WindowAdapter windowAdapter = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent event) {
-            //registrationService.unregisterPlayer();
-            event.getWindow().dispose();
+            registrationService.unregisterPlayer();
+            System.exit(0);
         }
     };
 

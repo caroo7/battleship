@@ -3,6 +3,7 @@ package gui.panels.boards;
 import models.BoardsMessage;
 import models.GameState;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.PlayerRegistrationService;
 import services.shared.ShootService;
 
 import javax.swing.*;
@@ -15,6 +16,9 @@ public class RivalBoard extends Board {
 
     @Autowired
     private ShootService shootService;
+
+    @Autowired
+    private PlayerRegistrationService registrationService;
 
     private long shipsLeft = 0;
 
@@ -35,7 +39,8 @@ public class RivalBoard extends Board {
 
         if (shipsLeft == 0) {
             JOptionPane.showMessageDialog(this, "You win!", "End game", JOptionPane.INFORMATION_MESSAGE);
-            //TODO close operation
+            registrationService.unregisterBothPlayers();
+            System.exit(0);
         }
     }
 
