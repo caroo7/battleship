@@ -15,16 +15,16 @@ import java.util.Map;
 public class BoardsMessageServiceImpl implements BoardsMessageService {
 
     @Autowired
-    private GameAvailableService gameAvailableService;
+    GameAvailableService gameAvailableService;
 
     @Autowired
-    private ActualPlayerService actualPlayerService;
+    ActualPlayerService actualPlayerService;
 
     @Autowired
-    private BoardStateService boardStateService;
+    BoardStateService boardStateService;
 
     @Autowired
-    private AliveShipsService aliveShipsService;
+    AliveShipsService aliveShipsService;
 
     @Override
     public BoardsMessage retrieveDataForUser(Player player) throws Exception {

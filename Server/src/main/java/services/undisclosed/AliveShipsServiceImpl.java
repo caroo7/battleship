@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AliveShipsServiceImpl implements AliveShipsService {
 
     @Autowired
-    private Board firstPlayerBoard;
+    Board firstPlayerBoard;
 
     @Autowired
-    private Board secondPlayerBoard;
+    Board secondPlayerBoard;
 
     @Override
     public long getRivalAliveAmountOfShips(Player player) throws Exception {
