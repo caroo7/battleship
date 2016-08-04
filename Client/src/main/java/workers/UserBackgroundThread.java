@@ -44,7 +44,6 @@ public class UserBackgroundThread {
             protected void process(List<BoardsMessage> chunks) {
                 BoardsMessage actualMessage = chunks.get(chunks.size() - 1);
                 if (actualMessage != null) {
-
                     try {
                         closeIfGameWasEnded(actualMessage);
                     } catch (RemoteConnectFailureException e) {

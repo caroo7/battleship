@@ -1,5 +1,6 @@
 package services.shared;
 
+import models.Board;
 import models.Player;
 import models.Ship;
 import models.ShipManager;

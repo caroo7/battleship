@@ -22,17 +22,19 @@ public class RivalBoard extends Board {
 
     private long shipsLeft = 0;
 
-    private int CURSOR_ALIGNMENT = 15;
+    private int CURSOR_HEIGHT = 15;
+
+    private int CURSOR_WIDTH = 5;
 
     private GameState isGamePlayed = GameState.NotYourTurn;
 
     private JLabel titles = new JLabel("Rival board. Ships left " + shipsLeft);
 
     @Override
-    public void update(BoardsMessage boardsMessage) {
+    public void updateGeneratedShips(BoardsMessage boardsMessage) {
         playingArea.boardState = boardsMessage.getActualRivalBoardState();
         shipsLeft = boardsMessage.getRivalShipsLeft();
-        isGamePlayed = boardsMessage.getGameState();
+        isGamePlayed = boardsMessage.getUserGameState();
         switchTitle();
         revalidate();
         repaint();
@@ -62,7 +64,7 @@ public class RivalBoard extends Board {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 if (isGamePlayed != GameState.NotYourTurn && SwingUtilities.isLeftMouseButton(mouseEvent)) {
-                    Point p = new Point(mouseEvent.getX() / (PlayingArea.weight / PlayingArea.size), (mouseEvent.getY() - CURSOR_ALIGNMENT) / (PlayingArea.height / PlayingArea.size));
+                    Point p = new Point((mouseEvent.getX() + CURSOR_WIDTH) / (PlayingArea.weight / PlayingArea.size), (mouseEvent.getY() - CURSOR_HEIGHT) / (PlayingArea.height / PlayingArea.size));
                     shootService.shootOn(p);
                 }
             }

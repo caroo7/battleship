@@ -1,20 +1,20 @@
 package models;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.Map;
-import java.awt.*;
 
 public final class BoardsMessage implements Serializable {
 
     private boolean isGameAvailable;
-    private GameState gameState;
+    private GameState userGameState;
     private Map<Point, CellState> actualUserBoardStates;
     private Map<Point, CellState> actualRivalBoardState;
     private long rivalShipsLeft;
 
-    public BoardsMessage(boolean isGameAvailable, GameState gameState, Map<Point, CellState> actualUserBoardStates, Map<Point, CellState> actualRivalBoardState, long rivalShipsLeft) {
+    public BoardsMessage(boolean isGameAvailable, GameState userGameState, Map<Point, CellState> actualUserBoardStates, Map<Point, CellState> actualRivalBoardState, long rivalShipsLeft) {
         this.isGameAvailable = isGameAvailable;
-        this.gameState = gameState;
+        this.userGameState = userGameState;
         this.actualUserBoardStates = actualUserBoardStates;
         this.actualRivalBoardState = actualRivalBoardState;
         this.rivalShipsLeft = rivalShipsLeft;
@@ -24,8 +24,8 @@ public final class BoardsMessage implements Serializable {
         return isGameAvailable;
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public GameState getUserGameState() {
+        return userGameState;
     }
 
     public Map<Point, CellState> getActualUserBoardStates() {

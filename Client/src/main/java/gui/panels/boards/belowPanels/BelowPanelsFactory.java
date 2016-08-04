@@ -25,16 +25,16 @@ public class BelowPanelsFactory {
     }
 
     private void initBelowPanelsMap() {
-        belowPanels.put(GameState.YourTurn, yourTurnBelowPanel());
+        belowPanels.put(GameState.YouCanPlay, yourTurnBelowPanel());
         belowPanels.put(GameState.NotYourTurn, notYourTurnBelowPanel());
     }
 
     private JPanel yourTurnBelowPanel() {
         JPanel belowPanel = new JPanel();
-        JLabel yourTurnPanel = new JLabel("Your turn click ok ");
+        JLabel yourTurnPanel = new JLabel("To see your board click ");
         JButton okButton = new JButton("Ok");
 
-        okButton.addActionListener(belowPanelsListenerFactory.getOkListner());
+        okButton.addActionListener(belowPanelsListenerFactory.getOkListener());
 
         belowPanel.add(yourTurnPanel);
         belowPanel.add(okButton);

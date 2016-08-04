@@ -12,6 +12,7 @@ import workers.UserBackgroundThread;
 
 import javax.annotation.PostConstruct;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -37,6 +38,7 @@ public class ListenersFactory {
     @Autowired
     private Subscriber userBoard;
 
+    @Autowired
     @PostConstruct
     public void initListenersFactory() {
         initListenersMap();
@@ -63,9 +65,8 @@ public class ListenersFactory {
 
     private ActionListener generateShipsAction() {
         return e -> {
-            System.out.println("Generate");
             Set<Ship> ships = shipGeneratorService.generateShips();
-            userBoard.update(ships);
+            userBoard.updateGeneratedShips(ships);
             shipManager.initShips(ships);
 
         };
@@ -73,7 +74,6 @@ public class ListenersFactory {
 
     private ActionListener startAction() {
         return e -> {
-            System.out.println("Start");
             Player player = null;
             try {
                 player = registrationService.registerPlayer();
@@ -83,6 +83,7 @@ public class ListenersFactory {
 
             gameInitService.initGame(player, shipManager);
             backgroundThread.execute(player);
+            userBoard.updateGeneratedShips(Collections.EMPTY_SET);
             Buttons.Generate.setEnabled(false);
             Buttons.Start.setEnabled(false);
         };

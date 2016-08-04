@@ -22,9 +22,6 @@ public class BoardsMessageServiceImpl implements BoardsMessageService {
     private ActualPlayerService actualPlayerService;
 
     @Autowired
-    private GameStateService gameStateService;
-
-    @Autowired
     private BoardStateService boardStateService;
 
     @Autowired
@@ -35,7 +32,7 @@ public class BoardsMessageServiceImpl implements BoardsMessageService {
 
         boolean isGameAvailable = gameAvailableService.isGameAvailable();
 
-        GameState gameState = getGameState(player);
+        GameState userGameState = getUserGameState(player);
 
         Map<Point, CellState> userBoardStates = boardStateService.getUserBoardState(player);
 
@@ -43,10 +40,10 @@ public class BoardsMessageServiceImpl implements BoardsMessageService {
 
         Long rivalShipsLeft = aliveShipsService.getRivalAliveAmountOfShips(player);
 
-        return rivalShipsLeft == null ? null : new BoardsMessage(isGameAvailable, gameState, userBoardStates, rivalBoardStates, rivalShipsLeft);
+        return rivalShipsLeft == null ? null : new BoardsMessage(isGameAvailable, userGameState, userBoardStates, rivalBoardStates, rivalShipsLeft);
     }
 
-    private GameState getGameState(Player player) {
-        return actualPlayerService.getActualPlayer() != player ? GameState.NotYourTurn : (gameStateService.isPlayerPlaying() ? GameState.Playing : GameState.YourTurn);
+    private GameState getUserGameState(Player player) {
+        return actualPlayerService.getActualPlayer() != player ? GameState.NotYourTurn : GameState.YouCanPlay;
     }
 }

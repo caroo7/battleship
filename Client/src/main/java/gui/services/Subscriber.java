@@ -6,8 +6,8 @@ import models.Ship;
 import java.util.Set;
 
 public interface Subscriber {
-    void update(BoardsMessage dataObject);
+    void updateGeneratedShips(BoardsMessage dataObject);
 
-    default void update(Set<Ship> ships) {
+    default void updateGeneratedShips(Set<Ship> ships) {
     }
 }

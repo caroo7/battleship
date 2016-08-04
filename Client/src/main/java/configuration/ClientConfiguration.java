@@ -66,10 +66,7 @@ public class ClientConfiguration {
         return new ShipManager();
     }
 
-    @Bean
-    public UserBelowPanel belowPanel() {
-        return new UserBelowPanel();
-    }
+
 
     @Bean
     public BelowPanelsListenerFactory belowPanelsListenerFactory() {
@@ -131,14 +128,6 @@ public class ClientConfiguration {
         return httpInvoker;
     }
 
-    @Bean
-    public HttpInvokerProxyFactoryBean gameStateServiceHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.GAME_STATE_SERVICE;
-        httpInvoker.setServiceInterface(GameStateService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
-    }
 
     @Bean
     public HttpInvokerProxyFactoryBean endGameServiceHttpInvokerProxyFactoryBean() {
