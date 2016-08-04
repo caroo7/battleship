@@ -14,6 +14,27 @@ import static gameLogic.CellState.SHOOTEDEMPTY;
 
 public class ShipsUtility {
 
+    public static Map<Point, CellState> getRealBoardStateAfterShootingVar2() {
+        Map<Point, CellState> result = createEmptyBoard();
+        result.put(new Point(0, 0), SHIP);
+        result.put(new Point(0, 1), SHIP);
+        result.put(new Point(0, 4), SHIP);
+        result.put(new Point(1, 4), SHIP);
+        result.put(new Point(2, 4), SHIP);
+        result.put(new Point(3, 4), SHIP);
+        result.put(new Point(6, 0), SHIP);
+        result.put(new Point(6, 2), SUNK);
+        result.put(new Point(5, 1), AROUNDSUNK);
+        result.put(new Point(5, 2), AROUNDSUNK);
+        result.put(new Point(5, 3), AROUNDSUNK);
+        result.put(new Point(6, 1), AROUNDSUNK);
+        result.put(new Point(6, 3), AROUNDSUNK);
+        result.put(new Point(7, 1), AROUNDSUNK);
+        result.put(new Point(7, 2), AROUNDSUNK);
+        result.put(new Point(7, 3), AROUNDSUNK);
+        return result;
+    }
+
     public static Ship createShipWithoutNeighbours(Point ... point) {
         Set<Point> coordinates = new HashSet<>();
         for (int i = 0; i < point.length; i++) {
@@ -84,7 +105,7 @@ public class ShipsUtility {
         return ships;
     }
 
-    public static Map<Point, CellState> getBoardStateWith4ShipsBeforeShooting(){
+    public static Map<Point, CellState> getRealBoardStateBeforeShooting(){
         Map<Point, CellState> result = createEmptyBoard();
         result.put(new Point(0, 0), SHIP);
         result.put(new Point(0, 1), SHIP);
@@ -96,7 +117,8 @@ public class ShipsUtility {
         result.put(new Point(6, 2), SHIP);
         return result;
     }
-    public static Map<Point, CellState> getBoardStateWith4ShipsAfterShooting() {
+
+    public static Map<Point, CellState> getRealBoardStateAfterShootingVar1() {
         Map<Point, CellState> result = createEmptyBoard();
         result.put(new Point(0, 0), SUNK);
         result.put(new Point(0, 1), SUNK);
@@ -112,6 +134,34 @@ public class ShipsUtility {
         result.put(new Point(1, 2), AROUNDSUNK);
         result.put(new Point(0, 2), AROUNDSUNK);
         result.put(new Point(3, 3), SHOOTEDEMPTY);
+        return result;
+    }
+
+    public static Map<Point, CellState> getRepresentationOfBoardStateAfterShootingVar1() {
+        Map<Point, CellState> result = createEmptyBoard();
+        result.put(new Point(0, 0), SUNK);
+        result.put(new Point(0, 1), SUNK);
+        result.put(new Point(0, 4), SHOOTEDSHIP);
+        result.put(new Point(1, 0), AROUNDSUNK);
+        result.put(new Point(1, 1), AROUNDSUNK);
+        result.put(new Point(1, 2), AROUNDSUNK);
+        result.put(new Point(1, 2), AROUNDSUNK);
+        result.put(new Point(0, 2), AROUNDSUNK);
+        result.put(new Point(3, 3), SHOOTEDEMPTY);
+        return result;
+    }
+
+    public static Map<Point, CellState> getRepresentationOfBoardStateAfterShootingVar2() {
+        Map<Point, CellState> result = createEmptyBoard();
+        result.put(new Point(6, 2), SUNK);
+        result.put(new Point(5, 1), AROUNDSUNK);
+        result.put(new Point(5, 2), AROUNDSUNK);
+        result.put(new Point(5, 3), AROUNDSUNK);
+        result.put(new Point(6, 1), AROUNDSUNK);
+        result.put(new Point(6, 3), AROUNDSUNK);
+        result.put(new Point(7, 1), AROUNDSUNK);
+        result.put(new Point(7, 2), AROUNDSUNK);
+        result.put(new Point(7, 3), AROUNDSUNK);
         return result;
     }
 

@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.Map;
 import java.util.Set;
 
-import static gameLogic.CellState.*;
 import static org.testng.Assert.assertEquals;
 
 public class BoardTest {
@@ -53,11 +52,11 @@ public class BoardTest {
     }
 
     private Map<Point, CellState> expectedStateAfterShooting() {
-        return ShipsUtility.getBoardStateWith4ShipsAfterShooting();
+        return ShipsUtility.getRealBoardStateAfterShootingVar1();
 
     }
 
     private Map<Point, CellState> expectedStateBeforeShooting() {
-         return ShipsUtility.getBoardStateWith4ShipsBeforeShooting();
+         return ShipsUtility.getRealBoardStateBeforeShooting();
     }
 }

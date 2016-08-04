@@ -12,9 +12,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import services.undisclosed.ActualPlayerService;
 import services.undisclosed.AliveShipsService;
 import services.undisclosed.BoardStateService;
@@ -76,31 +76,42 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         //then
         assertEquals(boardsMessage.isGameAvailable(), true);
         assertEquals(boardsMessage.getGameState(), GameState.YourTurn);
-        assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.getBoardStateWith4ShipsBeforeShooting());
-        assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getBoardStateWith4ShipsBeforeShooting());
+        assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.createEmptyBoard());
+        assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getRealBoardStateBeforeShooting());
         assertEquals(boardsMessage.getRivalShipsLeft(), 4);
-
-
     }
 
     @Test
     public void testTheMessageAfterShooting() throws Exception {
 
         //given
+        // first player
         shootService.shootOn(new Point(0, 0));
         shootService.shootOn(new Point(0, 1));
         shootService.shootOn(new Point(0, 4));
         shootService.shootOn(new Point(3, 3));
+        //second player
+        shootService.shootOn(new Point(6, 2));
 
         //when
-        BoardsMessage boardsMessage = boardsMessageService.retrieveDataForUser(Player.FIRST);
+        BoardsMessage boardsMessage1 = boardsMessageService.retrieveDataForUser(Player.FIRST);
+        BoardsMessage boardsMessage2 = boardsMessageService.retrieveDataForUser(Player.SECOND);
 
         //then
-        assertEquals(boardsMessage.isGameAvailable(), true);
-        assertEquals(boardsMessage.getGameState(), GameState.NotYourTurn);
-        assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.getBoardStateWith4ShipsAfterShooting());
-        assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getBoardStateWith4ShipsBeforeShooting());
-        assertEquals(boardsMessage.getRivalShipsLeft(),3);
+        SoftAssert sa = new SoftAssert();
+        // first player
+        sa.assertEquals(boardsMessage1.isGameAvailable(), true, "game availability is wrong for First player");
+        sa.assertEquals(boardsMessage1.getGameState(), GameState.NotYourTurn, "player's turn is wrong for First player");
+        sa.assertEquals(boardsMessage1.getActualRivalBoardState(), ShipsUtility.getRepresentationOfBoardStateAfterShootingVar1(), "Wrong representation of rival's board for First Player");
+        sa.assertEquals(boardsMessage1.getActualUserBoardStates(), ShipsUtility.getRealBoardStateAfterShootingVar2(), "wrong REAL board state for First player");
+        sa.assertEquals(boardsMessage1.getRivalShipsLeft(), 3, "wrong amount of alive rival ships for First Player");
+        // second player
+        sa.assertEquals(boardsMessage2.isGameAvailable(), true, "game availability is wrong for Second player");
+        sa.assertEquals(boardsMessage2.getGameState(), GameState.YourTurn, "player's turn is wrong for Second player");
+        sa.assertEquals(boardsMessage2.getActualRivalBoardState(), ShipsUtility.getRepresentationOfBoardStateAfterShootingVar2(), "Wrong representation of rival's board for Second Player");
+        sa.assertEquals(boardsMessage2.getActualUserBoardStates(), ShipsUtility.getRealBoardStateAfterShootingVar1(), "wrong REAL board state for Second player");
+        sa.assertEquals(boardsMessage2.getRivalShipsLeft(), 3, "wrong amount of alive rival ships for Second Player");
+        sa.assertAll();
     }
 
 }
