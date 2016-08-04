@@ -1,6 +1,7 @@
 package models;
 
 public enum GameState {
+
     NotYourTurn(false), YouCanPlay(false), YouArePlaying(true);
 
     private boolean buttonsActivity;

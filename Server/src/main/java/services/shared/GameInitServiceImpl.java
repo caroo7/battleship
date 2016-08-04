@@ -1,8 +1,8 @@
 package services.shared;
 
-import models.Board;
+import gameLogic.Board;
 import models.Player;
-import models.ShipManager;
+import gameLogic.ShipManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class GameInitServiceImpl implements GameInitService {

@@ -1,11 +1,12 @@
-package models;
+package gameLogic;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static models.CellState.*;
+import static gameLogic.CellState.AROUNDSUNK;
+import static gameLogic.CellState.SUNK;
 
 public class Board {
 

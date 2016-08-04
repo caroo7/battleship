@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.awt.event.ActionListener;
 
 public class BelowPanelsListenerFactory {
-
     @Autowired
     private UserBoard userBoardPanel;
 
     public ActionListener getOkListener() {
         return e -> {
-                  userBoardPanel.changeStateToPlaying();
+            userBoardPanel.changeStateToPlaying();
         };
     }
-
 }

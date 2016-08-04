@@ -9,8 +9,8 @@ import gui.panels.boards.belowPanels.BelowPanelsListenerFactory;
 import gui.panels.boards.belowPanels.UserBelowPanel;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.panels.buttons.ListenersFactory;
+import gameLogic.ShipManager;
 import gui.services.Publisher;
-import models.ShipManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
@@ -65,8 +65,6 @@ public class ClientConfiguration {
     public ShipManager shipManager() {
         return new ShipManager();
     }
-
-
 
     @Bean
     public BelowPanelsListenerFactory belowPanelsListenerFactory() {
@@ -127,7 +125,6 @@ public class ClientConfiguration {
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
-
 
     @Bean
     public HttpInvokerProxyFactoryBean endGameServiceHttpInvokerProxyFactoryBean() {

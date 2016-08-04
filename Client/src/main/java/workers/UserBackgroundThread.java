@@ -50,7 +50,6 @@ public class UserBackgroundThread {
                         System.out.println("Server doesn't work");
                         System.exit(0);
                     }
-
                     userBoardPublisher.notifyAllSubscribers(actualMessage);
                 }
             }

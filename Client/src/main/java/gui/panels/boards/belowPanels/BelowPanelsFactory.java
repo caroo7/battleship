@@ -25,18 +25,19 @@ public class BelowPanelsFactory {
     }
 
     private void initBelowPanelsMap() {
-        belowPanels.put(GameState.YouCanPlay, yourTurnBelowPanel());
+        belowPanels.put(GameState.YouCanPlay, youCanPlayPanel());
+        belowPanels.put(GameState.YouArePlaying, youArePlayingPanel());
         belowPanels.put(GameState.NotYourTurn, notYourTurnBelowPanel());
     }
 
-    private JPanel yourTurnBelowPanel() {
+    private JPanel youCanPlayPanel() {
         JPanel belowPanel = new JPanel();
-        JLabel yourTurnPanel = new JLabel("To see your board click ");
+        JLabel youCanPlayPanel = new JLabel("To see your board click ");
         JButton okButton = new JButton("Ok");
 
         okButton.addActionListener(belowPanelsListenerFactory.getOkListener());
 
-        belowPanel.add(yourTurnPanel);
+        belowPanel.add(youCanPlayPanel);
         belowPanel.add(okButton);
 
         return belowPanel;
@@ -46,5 +47,9 @@ public class BelowPanelsFactory {
         JPanel belowPanel = new JPanel();
         belowPanel.add(new JLabel("Not your turn"));
         return belowPanel;
+    }
+
+    private JPanel youArePlayingPanel() {
+        return new JPanel();
     }
 }

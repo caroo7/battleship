@@ -1,7 +1,7 @@
 package services.shared;
 
+import gameLogic.CellState;
 import models.BoardsMessage;
-import models.CellState;
 import models.GameState;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,16 @@ import java.util.Map;
 public class BoardsMessageServiceImpl implements BoardsMessageService {
 
     @Autowired
-    private GameAvailableService gameAvailableService;
+    GameAvailableService gameAvailableService;
 
     @Autowired
-    private ActualPlayerService actualPlayerService;
+    ActualPlayerService actualPlayerService;
 
     @Autowired
-    private BoardStateService boardStateService;
+    BoardStateService boardStateService;
 
     @Autowired
-    private AliveShipsService aliveShipsService;
+    AliveShipsService aliveShipsService;
 
     @Override
     public BoardsMessage retrieveDataForUser(Player player) {

@@ -1,6 +1,6 @@
 package services.shared;
 
-import models.Ship;
+import gameLogic.Ship;
 
 import java.util.Set;
 

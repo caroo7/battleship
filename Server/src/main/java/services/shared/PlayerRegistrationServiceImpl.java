@@ -10,7 +10,7 @@ public class PlayerRegistrationServiceImpl implements PlayerRegistrationService 
     private int connectedPlayersCounter = 0;
 
     @Autowired
-    private ActualPlayerService actualPlayerService;
+     ActualPlayerService actualPlayerService;
 
     @Override
     public Player registerPlayer() throws Exception {

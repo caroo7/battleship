@@ -31,7 +31,7 @@ public class RivalBoard extends Board {
     private JLabel titles = new JLabel("Rival board. Ships left " + shipsLeft);
 
     @Override
-    public void updateGeneratedShips(BoardsMessage boardsMessage) {
+    public void update(BoardsMessage boardsMessage) {
         playingArea.boardState = boardsMessage.getActualRivalBoardState();
         shipsLeft = boardsMessage.getRivalShipsLeft();
         isGamePlayed = boardsMessage.getUserGameState();

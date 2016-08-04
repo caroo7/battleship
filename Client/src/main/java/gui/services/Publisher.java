@@ -18,7 +18,7 @@ public class Publisher {
     }
 
     public void notifyAllSubscribers(BoardsMessage boardsMessage) {
-        subscribersList.stream().forEach(subscriber -> subscriber.updateGeneratedShips(boardsMessage));
+        subscribersList.stream().forEach(subscriber -> subscriber.update(boardsMessage));
     }
 
 }

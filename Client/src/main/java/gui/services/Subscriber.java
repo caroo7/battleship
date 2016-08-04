@@ -1,12 +1,13 @@
 package gui.services;
 
+import gameLogic.Ship;
 import models.BoardsMessage;
-import models.Ship;
 
 import java.util.Set;
 
+
 public interface Subscriber {
-    void updateGeneratedShips(BoardsMessage dataObject);
+    void update(BoardsMessage dataObject);
 
     default void updateGeneratedShips(Set<Ship> ships) {
     }

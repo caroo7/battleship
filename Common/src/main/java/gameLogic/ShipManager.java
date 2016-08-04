@@ -1,4 +1,4 @@
-package models;
+package gameLogic;
 
 import java.awt.*;
 import java.io.Serializable;

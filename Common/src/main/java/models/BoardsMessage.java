@@ -1,6 +1,7 @@
 package models;
 
 import java.awt.*;
+import gameLogic.CellState;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ public final class BoardsMessage implements Serializable {
 
     private boolean isGameAvailable;
     private GameState userGameState;
+    private GameState gameState;
     private Map<Point, CellState> actualUserBoardStates;
     private Map<Point, CellState> actualRivalBoardState;
     private long rivalShipsLeft;
@@ -23,6 +25,7 @@ public final class BoardsMessage implements Serializable {
     public boolean isGameAvailable() {
         return isGameAvailable;
     }
+
 
     public GameState getUserGameState() {
         return userGameState;

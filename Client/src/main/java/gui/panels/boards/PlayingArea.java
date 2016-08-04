@@ -1,6 +1,6 @@
 package gui.panels.boards;
 
-import models.CellState;
+import gameLogic.CellState;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,11 +1,8 @@
 package services.shared;
 
-import models.Board;
-import models.Player;
-import models.Ship;
-import models.ShipManager;
 
-import java.util.Set;
+import models.Player;
+import gameLogic.ShipManager;
 
 public interface GameInitService {
 

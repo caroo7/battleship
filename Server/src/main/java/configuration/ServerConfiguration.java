@@ -1,7 +1,7 @@
 package configuration;
 
 import com.sun.net.httpserver.HttpHandler;
-import models.Board;
+import gameLogic.Board;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerServiceExporter;

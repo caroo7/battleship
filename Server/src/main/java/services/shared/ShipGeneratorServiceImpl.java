@@ -1,7 +1,6 @@
 package services.shared;
 
-import models.Ship;
-
+import gameLogic.Ship;
 import java.awt.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,11 +22,12 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
         ships = new HashSet<>();
         invalidShipsCoordinates = new HashSet<>();
         generateShip(4);
-       /* generateShip(3);
+        generateShip(3);
+        generateShip(2);
         generateShip(2);
         generateShip(2);
         generateShip(1);
-        generateShip(1);*/
+        generateShip(1);
         return Collections.unmodifiableSet(ships);
     }
 

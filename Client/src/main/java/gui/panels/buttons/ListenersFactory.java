@@ -2,8 +2,8 @@ package gui.panels.buttons;
 
 import gui.services.Subscriber;
 import models.Player;
-import models.Ship;
-import models.ShipManager;
+import gameLogic.Ship;
+import gameLogic.ShipManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.shared.GameInitService;
 import services.shared.PlayerRegistrationService;
@@ -38,7 +38,6 @@ public class ListenersFactory {
     @Autowired
     private Subscriber userBoard;
 
-    @Autowired
     @PostConstruct
     public void initListenersFactory() {
         initListenersMap();
