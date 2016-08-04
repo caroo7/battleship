@@ -1,11 +1,12 @@
 package services.undisclosed;
 
+import models.GameState;
 import models.Player;
-import services.undisclosed.ActualPlayerService;
 
 public class ActualPlayerServiceImpl implements ActualPlayerService {
 
     private Player actualPlayer;
+
 
     @Override
     public void setActualPlayerAsFirstPlayerAtStart() {

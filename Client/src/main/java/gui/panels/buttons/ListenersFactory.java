@@ -1,5 +1,6 @@
 package gui.panels.buttons;
 
+import gui.services.Subscriber;
 import models.Player;
 import gameLogic.Ship;
 import gameLogic.ShipManager;
@@ -33,6 +34,9 @@ public class ListenersFactory {
     @Autowired
     private ShipManager shipManager;
 
+    @Autowired
+    private Subscriber userBoard;
+
     @PostConstruct
     public void initListenersFactory() {
         initListenersMap();
@@ -61,7 +65,9 @@ public class ListenersFactory {
         return e -> {
             System.out.println("Generate");
             Set<Ship> ships = shipGeneratorService.generateShips();
+            userBoard.update(ships);
             shipManager.initShips(ships);
+
         };
     }
 
@@ -71,12 +77,14 @@ public class ListenersFactory {
             Player player = null;
             try {
                 player = registrationService.registerPlayer();
-            } catch(Exception exception) {
+            } catch (Exception exception) {
                 System.out.println("Cannot register player!");
             }
 
             gameInitService.initGame(player, shipManager);
             backgroundThread.execute(player);
+            Buttons.Generate.setEnabled(false);
+            Buttons.Start.setEnabled(false);
         };
     }
 

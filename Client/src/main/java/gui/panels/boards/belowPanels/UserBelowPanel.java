@@ -1,27 +1,35 @@
 package gui.panels.boards.belowPanels;
 
-import gui.services.GameState;
+import models.GameState;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 
 public class UserBelowPanel extends JPanel {
-    private CardLayout belowCardLayout = new CardLayout();
-    private BelowPanelsFactory belowPanelsFactory = new BelowPanelsFactory();
 
-    public UserBelowPanel(){
+    @Autowired
+    private BelowPanelsFactory belowPanelsFactory;
+
+    private CardLayout belowCardLayout;
+
+    @PostConstruct
+    public void init() {
+        belowCardLayout = new CardLayout();
         initPanel();
     }
-   private void initPanel() {
-         setLayout(belowCardLayout);
-         add(belowPanelsFactory.getBelowPanel(GameState.Playing),GameState.Playing.toString());
-         add(belowPanelsFactory.getBelowPanel(GameState.YourTurn),GameState.YourTurn.toString());
-         add(belowPanelsFactory.getBelowPanel(GameState.NotYourTurn),GameState.NotYourTurn.toString());
+
+    private void initPanel() {
+        setLayout(belowCardLayout);
+        add(belowPanelsFactory.getBelowPanel(GameState.Playing), GameState.Playing.toString());
+        add(belowPanelsFactory.getBelowPanel(GameState.YourTurn), GameState.YourTurn.toString());
+        add(belowPanelsFactory.getBelowPanel(GameState.NotYourTurn), GameState.NotYourTurn.toString());
     }
 
 
-    public void showBelowPanel(GameState gameState){
-        belowCardLayout.show(this,gameState.toString());
+    public void showBelowPanel(GameState gameState) {
+        belowCardLayout.show(this, gameState.toString());
     }
 
 }

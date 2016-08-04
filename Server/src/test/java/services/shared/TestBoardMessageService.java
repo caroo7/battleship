@@ -5,6 +5,7 @@ import gameLogic.Board;
 import gameLogic.ShipManager;
 import gameLogic.ShipsUtility;
 import models.BoardsMessage;
+import models.GameState;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -74,7 +75,7 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
 
         //then
         assertEquals(boardsMessage.isGameAvailable(), true);
-        assertEquals(boardsMessage.isYourTurn(), true);
+        assertEquals(boardsMessage.getGameState(), GameState.YourTurn);
         assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.getBoardStateWith4ShipsBeforeShooting());
         assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getBoardStateWith4ShipsBeforeShooting());
         assertEquals(boardsMessage.getRivalShipsLeft(), 4);
@@ -96,7 +97,7 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
 
         //then
         assertEquals(boardsMessage.isGameAvailable(), true);
-        assertEquals(boardsMessage.isYourTurn(), false);
+        assertEquals(boardsMessage.getGameState(), GameState.NotYourTurn);
         assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.getBoardStateWith4ShipsAfterShooting());
         assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getBoardStateWith4ShipsBeforeShooting());
         assertEquals(boardsMessage.getRivalShipsLeft(),3);

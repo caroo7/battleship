@@ -13,11 +13,8 @@ public class AliveShipsServiceImpl implements AliveShipsService {
     Board secondPlayerBoard;
 
     @Override
-    public long getRivalAliveAmountOfShips(Player player) throws Exception {
-        Board rivalBoard = player == Player.FIRST ? secondPlayerBoard : firstPlayerBoard;
-        if(rivalBoard.getShipManager() == null) {
-            throw new Exception("Rival board not exists yet");
-        }
-        return rivalBoard.getShipManager().getAmountOfLeftShips();
+    public Long getRivalAliveAmountOfShips(Player player){
+        Board rivalBoard = (player == Player.FIRST) ? secondPlayerBoard : firstPlayerBoard;
+        return rivalBoard.getShipManager() == null? null : rivalBoard.getShipManager().getAmountOfLeftShips();
     }
 }

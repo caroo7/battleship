@@ -25,6 +25,13 @@ public class BoardStateServiceImpl implements BoardStateService {
     @Override
     public Map<Point, CellState> getRivalBoardState(Player player) {
         Board actualBoard = player == Player.FIRST ? secondPlayerBoard : firstPlayerBoard;
-        return actualBoard.representCurrentBoardState();
+        Map<Point, CellState> boardState = actualBoard.representCurrentBoardState();
+
+        boardState.keySet().stream().forEach(point -> {
+            if (boardState.get(point) == CellState.SHIP) {
+                boardState.put(point, CellState.EMPTY);
+            }
+        });
+        return boardState;
     }
 }

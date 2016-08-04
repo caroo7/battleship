@@ -1,7 +1,7 @@
 package gui.panels.boards;
 
 import gui.services.BoardPanelType;
-import gui.services.GameState;
+import models.GameState;
 import gui.services.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.shared.BoardsMessageService;
@@ -24,10 +24,8 @@ public class BoardsFactory {
     private RivalBoard rivalBoard;
 
     @Autowired
-    private Publisher userBoardPublisher;
+    private Publisher boardPublisher;
 
-    @Autowired
-    private Publisher rivalBoardPublisher;
 
     private Map<BoardPanelType, JPanel> boards = new HashMap<>();
 
@@ -46,8 +44,8 @@ public class BoardsFactory {
 
     private JPanel createPlayingBoard() {
         JPanel playingBoard = new JPanel(new GridLayout(1, 2));
-        playingBoard.add(userBoard.addSubscription(userBoardPublisher).addTitles().setBelowPanel(GameState.YourTurn));
-        playingBoard.add(rivalBoard.addSubscription(rivalBoardPublisher).addTitles().addListeners());
+        playingBoard.add(userBoard.addSubscription(boardPublisher).addTitles().setBelowPanel(GameState.NotYourTurn));
+        playingBoard.add(rivalBoard.addSubscription(boardPublisher).addTitles().addListeners());
         return playingBoard;
     }
 }

@@ -10,6 +10,7 @@ public class Config {
     static final String GAME_INIT_SERVICE = "/http/GameInitService";
     static final String SHOOT_SERVICE = "/http/ShootService";
     public static final int BOARD_SIZE = 8;
-
+    static final String GAME_STATE_SERVICE = "/http/GameStateService";
+    static final String END_GAME_SERVICE = "/http/EndGameService";
 
 }

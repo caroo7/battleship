@@ -21,7 +21,7 @@ public class ShootServiceImpl implements ShootService {
     private Board secondPlayerBoard;
 
     @Override
-    public Map<Point, CellState> shootOn(Point point) {
+    public void shootOn(Point point) {
         Player actualPlayer = actualPlayerService.getActualPlayer();
         Board actualBoard = actualPlayer == Player.FIRST ? secondPlayerBoard : firstPlayerBoard;
 
@@ -34,8 +34,6 @@ public class ShootServiceImpl implements ShootService {
                 actualPlayerService.changeActualPlayer();
             }
         }
-
-        return resultMap;
     }
 
 }

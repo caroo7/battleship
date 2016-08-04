@@ -5,7 +5,7 @@ import models.BoardsMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Publisher {
+public class Publisher {
 
     private List<Subscriber> subscribersList = new ArrayList<>();
 

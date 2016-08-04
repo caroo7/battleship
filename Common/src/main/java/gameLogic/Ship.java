@@ -27,7 +27,7 @@ public class Ship implements Serializable {
         alivePartOfShipLeft--;
     }
 
-    Set<Point> getCoordinates() {
+    public Set<Point> getCoordinates() {
         return Collections.unmodifiableSet(coordinates);
     }
 

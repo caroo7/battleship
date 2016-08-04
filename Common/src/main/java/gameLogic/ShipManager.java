@@ -1,3 +1,4 @@
+
 package gameLogic;
 
 import java.awt.*;
@@ -16,15 +17,21 @@ public class ShipManager implements Serializable {
 
     Set<Point> getPointsAroundSunkShip(Point point) {
         Set<Point> aroundSunkCells = new HashSet<>();
-        ships.stream().filter(ship -> ship.containsPoint(point)).forEach(ship -> ship.getNeighbours()
-                .stream().forEach(aroundSunkCells::add));
+        ships.stream()
+                .filter(ship -> ship.containsPoint(point))
+                .forEach(ship -> ship.getNeighbours()
+                        .stream()
+                        .forEach(aroundSunkCells::add));
         return aroundSunkCells;
     }
 
     Set<Point> getPointsOfSunkShip(Point point) {
         Set<Point> sunkCells = new HashSet<>();
-        ships.stream().filter(ship -> ship.containsPoint(point)).forEach(ship -> ship.getCoordinates()
-                .stream().forEach(sunkCells::add));
+        ships.stream()
+                .filter(ship -> ship.containsPoint(point))
+                .forEach(ship -> ship.getCoordinates()
+                        .stream()
+                        .forEach(sunkCells::add));
         return sunkCells;
     }
 
