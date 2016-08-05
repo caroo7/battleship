@@ -1,16 +1,18 @@
 package gui.panels.buttons;
 
-import gui.services.Subscriber;
-import models.Player;
 import gameLogic.Ship;
 import gameLogic.ShipManager;
+import gui.services.Subscriber;
+import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.shared.GameInitService;
 import services.shared.PlayerRegistrationService;
 import services.shared.ShipGeneratorService;
+import services.shared.ShootService;
 import workers.UserBackgroundThread;
 
 import javax.annotation.PostConstruct;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +35,9 @@ public class ListenersFactory {
     private GameInitService gameInitService;
 
     @Autowired
+    private ShootService shootService;
+
+    @Autowired
     private ShipManager shipManager;
 
     @Autowired
@@ -48,7 +53,6 @@ public class ListenersFactory {
         });
     }
 
-
     private void initListenersMap() {
         listeners.put(Buttons.Generate, generateShipsAction());
         listeners.put(Buttons.Start, startAction());
@@ -58,16 +62,13 @@ public class ListenersFactory {
         listeners.put(Buttons.TwoShoots, twoShootsAction());
     }
 
-    /* TODO
-    *   implement all below action methods
-    * */
 
     private ActionListener generateShipsAction() {
         return e -> {
             Set<Ship> ships = shipGeneratorService.generateShips();
             userBoard.updateGeneratedShips(ships);
             shipManager.initShips(ships);
-
+            Buttons.Start.setEnabled(true);
         };
     }
 
@@ -85,30 +86,37 @@ public class ListenersFactory {
             userBoard.updateGeneratedShips(Collections.EMPTY_SET);
             Buttons.Generate.setEnabled(false);
             Buttons.Start.setEnabled(false);
+            Buttons.FourShoots.setEnabled(true);
+            Buttons.ThreeShoots.setEnabled(true);
+            Buttons.TwoShoots.setEnabled(true);
         };
     }
 
     private ActionListener rulesAction() {
         return e -> {
-            System.out.println("Rules");
+            ImageIcon rulesIcon = new ImageIcon(getClass().getResource("/GameRules.jpg"));
+            JOptionPane.showConfirmDialog(null, rulesIcon, "Rules", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE);
         };
     }
 
     private ActionListener fourShootsAction() {
         return e -> {
-            System.out.println("Four shoots");
+            shootService.randomShoot(4);
+            Buttons.FourShoots.setPermanentlyDisabled();
         };
     }
 
     private ActionListener threeShootsAction() {
         return e -> {
-            System.out.println("Three shoots");
+            shootService.randomShoot(3);
+            Buttons.ThreeShoots.setPermanentlyDisabled();
         };
     }
 
     private ActionListener twoShootsAction() {
         return e -> {
-            System.out.println("Two shoots");
+            shootService.randomShoot(2);
+            Buttons.TwoShoots.setPermanentlyDisabled();
         };
     }
 }

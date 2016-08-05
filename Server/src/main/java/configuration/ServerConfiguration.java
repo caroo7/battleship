@@ -27,6 +27,7 @@ public class ServerConfiguration {
         httpHandlers.put(Config.GAME_INIT_SERVICE, gameInitHttpInvokerServiceExporter());
         httpHandlers.put(Config.SHOOT_SERVICE, shootServiceHttpInvokerServiceExporter());
         httpHandlers.put(Config.END_GAME_SERVICE, endGameServiceHttpInvokerServiceExporter());
+        httpHandlers.put(Config.MAIN_FRAME_POSITION_SERVICE, mainFramePositionServiceHttpInvokerServiceExporter());
         httpServerFactoryBean.setContexts(httpHandlers);
 
         return httpServerFactoryBean;
@@ -81,6 +82,14 @@ public class ServerConfiguration {
     }
 
     @Bean
+    public SimpleHttpInvokerServiceExporter mainFramePositionServiceHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(MainFramePositionService.class);
+        simpleHttpInvokerServiceExporter.setService(mainFramePositionService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
+    @Bean
     public BoardsMessageService boardMessageService() {
         return new BoardsMessageServiceImpl();
     }
@@ -131,6 +140,11 @@ public class ServerConfiguration {
     }
 
     @Bean
+    public MainFramePositionService mainFramePositionService() {
+        return new MainFramePositionServiceImpl();
+    }
+
+    @Bean
     public Board firstPlayerBoard() {
         return new Board();
     }
@@ -139,6 +153,5 @@ public class ServerConfiguration {
     public Board secondPlayerBoard() {
         return new Board();
     }
-
 
 }

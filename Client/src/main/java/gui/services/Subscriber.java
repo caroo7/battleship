@@ -5,8 +5,9 @@ import models.BoardsMessage;
 
 import java.util.Set;
 
-
+@FunctionalInterface
 public interface Subscriber {
+
     void update(BoardsMessage dataObject);
 
     default void updateGeneratedShips(Set<Ship> ships) {

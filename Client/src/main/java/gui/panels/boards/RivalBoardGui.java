@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class RivalBoard extends Board {
+public class RivalBoardGui extends BoardGui {
 
     @Autowired
     private ShootService shootService;
@@ -53,13 +53,13 @@ public class RivalBoard extends Board {
     }
 
     @Override
-    Board addTitles() {
+    BoardGui addTitles() {
         add(titles, BorderLayout.NORTH);
         return this;
     }
 
     @Override
-    Board addListeners() {
+    BoardGui addListeners() {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {

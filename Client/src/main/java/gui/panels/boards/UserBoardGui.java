@@ -7,30 +7,32 @@ import gui.panels.buttons.Buttons;
 import models.BoardsMessage;
 import models.GameState;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 import java.util.Set;
 
-public class UserBoard extends Board {
+public class UserBoardGui extends BoardGui {
     @Autowired
     private UserBelowPanel userBelowPanel;
 
-    boolean isPlaying = false;
+    private boolean isPlaying = false;
 
     @Override
     public void update(BoardsMessage boardsMessage) {
         setProperBoardState(boardsMessage.getUserGameState(), boardsMessage.getActualUserBoardStates());
         setShootsButtonsActivity(boardsMessage.getUserGameState());
-        userBelowPanel.showBelowPanel(boardsMessage.getUserGameState());
+        setBelowPanel(boardsMessage.getUserGameState());
         repaint();
+        revalidate();
     }
 
 
-    private void setShootsButtonsActivity(GameState isYourTurn) {
-        Buttons.FourShoots.setEnabled(isYourTurn.getButtonsActivity());
-        Buttons.ThreeShoots.setEnabled(isYourTurn.getButtonsActivity());
-        Buttons.TwoShoots.setEnabled(isYourTurn.getButtonsActivity());
+    private void setShootsButtonsActivity(GameState gameState) {
+        Buttons.FourShoots.setEnabled(gameState.getButtonsActivity());
+        Buttons.ThreeShoots.setEnabled(gameState.getButtonsActivity());
+        Buttons.TwoShoots.setEnabled(gameState.getButtonsActivity());
     }
 
     public void updateGeneratedShips(Set<Ship> ships) {
@@ -52,15 +54,16 @@ public class UserBoard extends Board {
     }
 
     @Override
-    Board addTitles() {
+    BoardGui addTitles() {
         super.add(new JLabel("Your board"), BorderLayout.NORTH);
         return this;
     }
 
     @Override
-    Board setBelowPanel(GameState gameState) {
+    BoardGui setBelowPanel(GameState gameState) {
         super.add(userBelowPanel.getUserBelowPanel(), BorderLayout.SOUTH);
-        userBelowPanel.showBelowPanel(gameState);
+        if (isPlaying) userBelowPanel.showBelowPanel(GameState.YouArePlaying);
+        else userBelowPanel.showBelowPanel(gameState);
         return this;
     }
 
