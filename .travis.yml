@@ -3,4 +3,4 @@ jdk:
   - oraclejdk8
 script: mvn compile test
 env:
-  - DISPLAY=:0
+  - unset DISPLAY
