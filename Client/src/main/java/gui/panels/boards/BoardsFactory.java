@@ -18,10 +18,10 @@ public class BoardsFactory {
     private BoardsMessageService boardsMessageService;
 
     @Autowired
-    private UserBoard userBoard;
+    private UserBoardGui userBoard;
 
     @Autowired
-    private RivalBoard rivalBoard;
+    private RivalBoardGui rivalBoard;
 
     @Autowired
     private Publisher boardPublisher;

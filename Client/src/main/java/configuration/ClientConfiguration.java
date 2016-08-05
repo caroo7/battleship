@@ -2,8 +2,8 @@ package configuration;
 
 import gui.BattleshipMainFrame;
 import gui.panels.boards.BoardsFactory;
-import gui.panels.boards.RivalBoard;
-import gui.panels.boards.UserBoard;
+import gui.panels.boards.RivalBoardGui;
+import gui.panels.boards.UserBoardGui;
 import gui.panels.boards.belowPanels.BelowPanelsFactory;
 import gui.panels.boards.belowPanels.BelowPanelsListenerFactory;
 import gui.panels.boards.belowPanels.UserBelowPanel;
@@ -46,13 +46,13 @@ public class ClientConfiguration {
     }
 
     @Bean
-    public UserBoard userBoard() {
-        return new UserBoard();
+    public UserBoardGui userBoard() {
+        return new UserBoardGui();
     }
 
     @Bean
-    public RivalBoard rivalBoard() {
-        return new RivalBoard();
+    public RivalBoardGui rivalBoard() {
+        return new RivalBoardGui();
     }
 
     @Bean
@@ -134,5 +134,14 @@ public class ClientConfiguration {
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
+    @Bean
+    public HttpInvokerProxyFactoryBean mainFramePositionServiceHttpInvokerProxyFactoryBean() {
+        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
+        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.MAIN_FRAME_POSITION_SERVICE;
+        httpInvoker.setServiceInterface(MainFramePositionService.class);
+        httpInvoker.setServiceUrl(serviceURL);
+        return httpInvoker;
+    }
+
 
 }

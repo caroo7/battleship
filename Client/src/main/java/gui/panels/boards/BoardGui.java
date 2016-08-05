@@ -8,26 +8,26 @@ import javax.swing.*;
 import java.awt.*;
 
 
-abstract class Board extends JPanel implements Subscriber {
+abstract class BoardGui extends JPanel implements Subscriber {
 
     PlayingArea playingArea = new PlayingArea();
 
-    abstract Board addTitles();
+    abstract BoardGui addTitles();
 
-    Board addListeners() {
+    BoardGui addListeners() {
         return this;
     }
 
-    Board setBelowPanel(GameState gameState) {
+    BoardGui setBelowPanel(GameState gameState) {
         return this;
     }
 
-    Board() {
+    BoardGui() {
         setLayout(new BorderLayout());
         add(playingArea, BorderLayout.CENTER);
     }
 
-    Board addSubscription(Publisher publisher) {
+    BoardGui addSubscription(Publisher publisher) {
         publisher.subscribe(this);
         return this;
     }

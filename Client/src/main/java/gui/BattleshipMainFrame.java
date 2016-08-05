@@ -1,9 +1,11 @@
 package gui;
 
+import configuration.Config;
 import gui.panels.boards.BoardsFactory;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.services.BoardPanelType;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.MainFramePositionService;
 import services.shared.PlayerRegistrationService;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +24,9 @@ public class BattleshipMainFrame {
 
     @Autowired
     private PlayerRegistrationService registrationService;
+
+    @Autowired
+    private MainFramePositionService mainFramePositionService;
 
     private JFrame battleshipMainFrame = new JFrame();
 
@@ -42,14 +47,13 @@ public class BattleshipMainFrame {
     }
 
     private void setMainFrameProperties() {
-        battleshipMainFrame.setSize(new Dimension(720, 450));
+        battleshipMainFrame.setSize(new Dimension(Config.MAIN_FRAME_WIDTH, Config.MAIN_FRAME_HEIGHT));
         battleshipMainFrame.setTitle("Battleship");
         battleshipMainFrame.setLayout(new BorderLayout());
         battleshipMainFrame.setResizable(false);
-        battleshipMainFrame.setLocationRelativeTo(null);
+        battleshipMainFrame.setLocation(mainFramePositionService.getProperFrameLocation());
         battleshipMainFrame.addWindowListener(windowAdapter);
         battleshipMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     private void addBoardsPanel() {

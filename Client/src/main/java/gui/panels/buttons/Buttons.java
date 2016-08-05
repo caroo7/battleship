@@ -4,25 +4,34 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public enum Buttons {
-    Generate("Generate ships"),Start("Start"),Rules("Rules"),
-    FourShoots("4 shoots"),ThreeShoots("3 shoots"),TwoShoots("2 shoots");
+    Generate("Generate ships", true), Start("Start", false), Rules("Rules", true),
+    FourShoots("4 shoots", false), ThreeShoots("3 shoots", false), TwoShoots("2 shoots", false);
 
-    private String title;
-    private JButton button ;
+    private boolean isPermanentlyDisabled;
+    private JButton button;
 
-    Buttons(String title){
-      button = new JButton(title);
+    Buttons(String title, boolean isEnabledAtStart) {
+        button = new JButton(title);
+        button.setEnabled(isEnabledAtStart);
     }
 
-    public void setEnabled(boolean enabled){
-        button.setEnabled(enabled);
+    public void setPermanentlyDisabled() {
+        setEnabled(false);
+        isPermanentlyDisabled = true;
+
     }
 
-    void addListener(ActionListener actionListener){
+    public void setEnabled(boolean enabled) {
+        if (!isPermanentlyDisabled) {
+            button.setEnabled(enabled);
+        }
+    }
+
+    void addListener(ActionListener actionListener) {
         button.addActionListener(actionListener);
     }
 
-    void addToPanel(JPanel panel){
+    void addToPanel(JPanel panel) {
         panel.add(button);
     }
 }

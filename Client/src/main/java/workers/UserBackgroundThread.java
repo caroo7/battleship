@@ -46,7 +46,7 @@ public class UserBackgroundThread {
                 if (actualMessage != null) {
                     try {
                         closeIfGameWasEnded(actualMessage);
-                    } catch (RemoteConnectFailureException e) {
+                    } catch (Exception e) {
                         System.out.println("Server doesn't work");
                         System.exit(0);
                     }
@@ -58,7 +58,7 @@ public class UserBackgroundThread {
         backgroundThread.execute();
     }
 
-    private void closeIfGameWasEnded(BoardsMessage actualMessage) throws RemoteConnectFailureException {
+    private void closeIfGameWasEnded(BoardsMessage actualMessage) throws Exception {
         if (!actualMessage.isGameAvailable()) {
             endGameService.endGame();
         }
