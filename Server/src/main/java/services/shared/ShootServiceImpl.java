@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 public class ShootServiceImpl implements ShootService {
 
     @Autowired
-    private ActualPlayerService actualPlayerService;
+    ActualPlayerService actualPlayerService;
 
     @Autowired
-    private Board firstPlayerBoard;
+    Board firstPlayerBoard;
 
     @Autowired
-    private Board secondPlayerBoard;
+    Board secondPlayerBoard;
 
     @Override
     public void shootOn(Point point) {
