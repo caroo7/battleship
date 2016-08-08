@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 class PlayingArea extends JPanel {
-
     final static int weight = 320;
     final static int height = 320;
     final static int size = Config.BOARD_SIZE;

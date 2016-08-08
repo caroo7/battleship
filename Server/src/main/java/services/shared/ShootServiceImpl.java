@@ -18,19 +18,19 @@ import java.util.stream.Collectors;
 public class ShootServiceImpl implements ShootService {
 
     @Autowired
-    private ActualPlayerServiceImpl actualPlayerService;
+    ActualPlayerServiceImpl actualPlayerService;
 
     /**
      * Contains first player board statuses
      */
     @Autowired
-    private Board firstPlayerBoard;
+    Board firstPlayerBoard;
 
     /**
      * Contains second player board statuses
      */
     @Autowired
-    private Board secondPlayerBoard;
+    Board secondPlayerBoard;
 
     /**
      * It is used when we clicking on rival board if there is our turn.

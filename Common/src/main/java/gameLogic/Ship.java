@@ -6,6 +6,12 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * Class {@code Ship} represent ship in Battleship game.
+ * In it's state it contains information about {@link java.awt.Point} points of
+ * two types: <b>coordinates</b> - points, on which ship is located
+ * and <b>neighbours</b> - points, which belong to {@link Cell} cells around the ship.
+ */
 public class Ship implements Serializable {
 
     private Set<Point> coordinates;

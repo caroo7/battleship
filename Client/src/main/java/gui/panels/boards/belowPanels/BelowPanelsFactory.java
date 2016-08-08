@@ -55,5 +55,4 @@ public class BelowPanelsFactory {
     private JPanel youArePlayingPanel() {
         return new JPanel();
     }
-
 }
