@@ -5,6 +5,14 @@ import static gameLogic.CellState.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class {@code Cell} represents cell on game {@link Board}.
+ * This class has static methods for creating <b>two types</b> of Cell instances:
+ *<b>empty</b> and <b>with ship</b>.
+ * Every cell has state, which represent part of game flow. This state changes during the game
+ * according to rules of changing.
+ */
+
 public class Cell {
 
     private CellState state;
