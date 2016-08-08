@@ -11,7 +11,7 @@ public class TestActualPlayerService {
     public void testPlayersOrder() {
 
         //given
-        ActualPlayerService actualPlayerService = new ActualPlayerServiceImpl();
+        ActualPlayerServiceImpl actualPlayerService = new ActualPlayerServiceImpl();
 
         //when
         actualPlayerService.setActualPlayerAsFirstPlayerAtStart();

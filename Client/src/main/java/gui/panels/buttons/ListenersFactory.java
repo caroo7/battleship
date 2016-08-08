@@ -43,6 +43,9 @@ public class ListenersFactory {
     @Autowired
     private Subscriber userBoard;
 
+    /**
+     * Add listeners for each button. Buttons have own actions which use correct services and affect on the other buttons after click
+     */
     @PostConstruct
     public void initListenersFactory() {
         initListenersMap();

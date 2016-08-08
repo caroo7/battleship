@@ -7,16 +7,34 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Responsible for set of ships generation. This set will be used in future during the game.
+ */
 public class ShipGeneratorServiceImpl implements ShipGeneratorService {
 
+    /**
+     * Generated ships
+     */
     private Set<Ship> ships;
 
+    /**
+     * Places where we cannot generate ships (because of already existed ships)
+     */
     private Set<Point> invalidShipsCoordinates;
 
     private Random random = new Random();
 
-    private static final int BOARD_SIZE = 8; // app hang off when change to smaller value (e.g. 8)
+    /**
+     * Board edge size (e.g. 8 means that board has 8x8 size)
+     */
+    private static final int BOARD_SIZE = 8;
 
+    /**
+     * It is used during generation phase, before game starts. Creates hardcoded numbers of horizontal and vertical ships randomly.
+     * Also add information about places around generated ship (neighbours). It ensures that there will be no ships which adhere together.
+     * If ship lays on the border of the board it doesn't allow to add to neighbours points out of the board.
+     * @return created set of ships
+     */
     @Override
     public Set<Ship> generateShips() {
         ships = new HashSet<>();

@@ -15,12 +15,19 @@ public enum Buttons {
         button.setEnabled(isEnabledAtStart);
     }
 
+    /**
+     * Some buttons on below panel should be permanently disabled in some cases. This method change button status to disabled (freeze the button)
+     * and by setting isPermanentlyDisabled to true doesn't allow to enable this button during the game
+     */
     public void setPermanentlyDisabled() {
         setEnabled(false);
         isPermanentlyDisabled = true;
-
     }
 
+    /**
+     * Set button enabled (true) or disabled (freeze it - false)
+     * @param enabled - true or false
+     */
     public void setEnabled(boolean enabled) {
         if (!isPermanentlyDisabled) {
             button.setEnabled(enabled);

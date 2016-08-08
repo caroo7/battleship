@@ -100,12 +100,12 @@ public class ServerConfiguration {
     }
 
     @Bean
-    public ActualPlayerService actualPlayerService() {
+    public ActualPlayerServiceImpl actualPlayerService() {
         return new ActualPlayerServiceImpl();
     }
 
     @Bean
-    public GameAvailableService gameAvailableService() {
+    public GameAvailableServiceImpl gameAvailableService() {
         return new GameAvailableServiceImpl();
     }
 
@@ -115,7 +115,7 @@ public class ServerConfiguration {
     }
 
     @Bean
-    public BoardStateService boardStateService() {
+    public BoardStateServiceImpl boardStateService() {
         return new BoardStateServiceImpl();
     }
 
@@ -130,7 +130,7 @@ public class ServerConfiguration {
     }
 
     @Bean
-    public AliveShipsService aliveShipsService() {
+    public AliveShipsServiceImpl aliveShipsService() {
         return new AliveShipsServiceImpl();
     }
 

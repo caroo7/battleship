@@ -4,7 +4,7 @@ import gameLogic.Board;
 import gameLogic.CellState;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import services.undisclosed.ActualPlayerService;
+import services.undisclosed.ActualPlayerServiceImpl;
 
 import java.awt.*;
 import java.util.List;
@@ -12,17 +12,32 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * Responsible for shooting to ships located on rival board.
+ */
 public class ShootServiceImpl implements ShootService {
 
     @Autowired
-    private ActualPlayerService actualPlayerService;
+    private ActualPlayerServiceImpl actualPlayerService;
 
+    /**
+     * Contains first player board statuses
+     */
     @Autowired
     private Board firstPlayerBoard;
 
+    /**
+     * Contains second player board statuses
+     */
     @Autowired
     private Board secondPlayerBoard;
 
+    /**
+     * It is used when we clicking on rival board if there is our turn.
+     * Determine the actual player based on ActualPlayerService and choose proper board.
+     * Update board according to shoot and change actual player where player who shoot missed.
+     * @param point on the board where we want to shoot
+     */
     @Override
     public void shootOn(Point point) {
         Map<Point, CellState> boardStateAfterShoot = retrieveBoardAfterShoot(point);
@@ -31,6 +46,11 @@ public class ShootServiceImpl implements ShootService {
         }
     }
 
+    /**
+     * Responsible for make volley of shots in few random places on the board (if cell status is EMPTY or SHIP).
+     * Looking for all places on the chosen board where player can shoot. Randomly select appropriate number of places and always change player at the end.
+     * @param shootNumber - size of volley of shoots. Determine how many free places will be afflicted.
+     */
     @Override
     public void randomShoot(int shootNumber) {
         Map<Point, CellState> boardState = getActualBoardState().representCurrentBoardState();

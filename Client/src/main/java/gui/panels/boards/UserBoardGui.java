@@ -19,6 +19,11 @@ public class UserBoardGui extends BoardGui {
 
     private boolean isPlaying = false;
 
+    /**
+     *  update GUI using message retrieved from server side. Method is invoking periodically so in all time we have an actual GUI.
+     *  If win condition happens players are unregister and game ends.
+     * @param boardsMessage - message objects retrieved from server side which contains whole information necessary for GUI update.
+     */
     @Override
     public void update(BoardsMessage boardsMessage) {
         setProperBoardState(boardsMessage.getUserGameState(), boardsMessage.getActualUserBoardStates());
@@ -35,6 +40,10 @@ public class UserBoardGui extends BoardGui {
         Buttons.TwoShoots.setEnabled(gameState.getButtonsActivity());
     }
 
+    /**
+     * update board before game start, when we're generating ships. After every generation board will be refreshed and will show actual ships.
+     * @param ships from generator service which have to be display after every 'generate' click
+     */
     public void updateGeneratedShips(Set<Ship> ships) {
         playingArea.setEmptyBoard();
         ships.stream().forEach(ship -> ship.getCoordinates()

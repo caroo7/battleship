@@ -5,28 +5,36 @@ import models.BoardsMessage;
 import models.GameState;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import services.undisclosed.ActualPlayerService;
-import services.undisclosed.AliveShipsService;
-import services.undisclosed.BoardStateService;
-import services.undisclosed.GameAvailableService;
+import services.undisclosed.ActualPlayerServiceImpl;
+import services.undisclosed.AliveShipsServiceImpl;
+import services.undisclosed.BoardStateServiceImpl;
+import services.undisclosed.GameAvailableServiceImpl;
 
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * This service is responsible for retrieving message object which contains all information necessary for player
+ * Method can be invoking sequentially in new thread.
+ */
 public class BoardsMessageServiceImpl implements BoardsMessageService {
 
     @Autowired
-    GameAvailableService gameAvailableService;
+    GameAvailableServiceImpl gameAvailableService;
 
     @Autowired
-    ActualPlayerService actualPlayerService;
+    ActualPlayerServiceImpl actualPlayerService;
 
     @Autowired
-    BoardStateService boardStateService;
+    BoardStateServiceImpl boardStateService;
 
     @Autowired
-    AliveShipsService aliveShipsService;
+    AliveShipsServiceImpl aliveShipsService;
 
+    /**
+     * @param player determine player. Based on this param method knows from where it should retrieves data
+     * @return big message which contains whole information for player, like: player board, rival board, number of rival alive ships, game state, info about game availability
+     */
     @Override
     public BoardsMessage retrieveDataForUser(Player player) {
 

@@ -15,10 +15,10 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import services.undisclosed.ActualPlayerService;
-import services.undisclosed.AliveShipsService;
-import services.undisclosed.BoardStateService;
-import services.undisclosed.GameAvailableService;
+import services.undisclosed.ActualPlayerServiceImpl;
+import services.undisclosed.AliveShipsServiceImpl;
+import services.undisclosed.BoardStateServiceImpl;
+import services.undisclosed.GameAvailableServiceImpl;
 
 import java.awt.*;
 
@@ -49,16 +49,16 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         Board secondPlayerBoard = (Board) context.getBean("secondPlayerBoard");
         secondPlayerBoard.init(secondShipManager);
 
-        ActualPlayerService actualPlayerService = (ActualPlayerService) context.getBean("actualPlayerService");
+        ActualPlayerServiceImpl actualPlayerService = (ActualPlayerServiceImpl) context.getBean("actualPlayerService");
         actualPlayerService.setActualPlayerAsFirstPlayerAtStart();
 
         PlayerRegistrationService playerRegistrationService = (PlayerRegistrationService) context.getBean("playerRegistrationService");
         playerRegistrationService.registerPlayer();
         playerRegistrationService.registerPlayer();
 
-        GameAvailableService gameAvailableService = (GameAvailableService) context.getBean("gameAvailableService");
-        BoardStateService boardStateService = (BoardStateService) context.getBean("boardStateService");
-        AliveShipsService aliveShipsService = (AliveShipsService) context.getBean("aliveShipsService");
+        GameAvailableServiceImpl gameAvailableService = (GameAvailableServiceImpl) context.getBean("gameAvailableService");
+        BoardStateServiceImpl boardStateService = (BoardStateServiceImpl) context.getBean("boardStateService");
+        AliveShipsServiceImpl aliveShipsService = (AliveShipsServiceImpl) context.getBean("aliveShipsService");
         this.boardsMessageService = (BoardsMessageService) context.getBean("boardMessageService");
 
         this.shootService = (ShootService) context.getBean("shootService");

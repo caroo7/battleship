@@ -20,7 +20,7 @@ public class RivalBoardGui extends BoardGui {
     @Autowired
     private PlayerRegistrationService registrationService;
 
-    private long shipsLeft = 0;
+    private long shipsLeft;
 
     private int CURSOR_HEIGHT = 15;
 
@@ -30,6 +30,11 @@ public class RivalBoardGui extends BoardGui {
 
     private JLabel titles = new JLabel("Rival board. Ships left " + shipsLeft);
 
+    /**
+     *  update GUI using message retrieved from server side. Method is invoking periodically so in all time we have an actual GUI.
+     *  If win condition happens players are unregister and game ends.
+     * @param boardsMessage - message objects retrieved from server side which contains whole information necessary for GUI update.
+     */
     @Override
     public void update(BoardsMessage boardsMessage) {
         playingArea.boardState = boardsMessage.getActualRivalBoardState();

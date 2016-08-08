@@ -15,6 +15,9 @@ public class BelowPanelsFactory {
 
     private Map<GameState, JPanel> belowPanels = new HashMap<>();
 
+    /**
+     * Initialize panels which will be displayed using card layout later (based on game state value)
+     */
     @PostConstruct
     public void init() {
         initBelowPanelsMap();
@@ -52,4 +55,5 @@ public class BelowPanelsFactory {
     private JPanel youArePlayingPanel() {
         return new JPanel();
     }
+
 }

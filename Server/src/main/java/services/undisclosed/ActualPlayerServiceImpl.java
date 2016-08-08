@@ -1,24 +1,32 @@
 package services.undisclosed;
 
-import models.GameState;
 import models.Player;
 
-public class ActualPlayerServiceImpl implements ActualPlayerService {
+/**
+ * Set of operations for determining who is actual player during the game and changing him
+ */
+public class ActualPlayerServiceImpl {
 
     private Player actualPlayer;
 
-
-    @Override
+    /**
+     * Always first connected player is the first who'll start the game
+     */
     public void setActualPlayerAsFirstPlayerAtStart() {
         actualPlayer = Player.FIRST;
     }
 
-    @Override
+    /**
+     * Retrieve actual player instance.
+     * @return first or second player - depends who is actual player at the moment.
+     */
     public Player getActualPlayer() {
         return actualPlayer;
     }
 
-    @Override
+    /**
+     * switch actual player
+     */
     public void changeActualPlayer() {
         actualPlayer = actualPlayer == Player.FIRST ? Player.SECOND : Player.FIRST;
     }

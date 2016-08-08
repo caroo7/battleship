@@ -25,8 +25,16 @@ public class UserBackgroundThread {
     @Autowired
     private EndGameService endGameService;
 
+    /**
+     * Time interval between two requests to server
+     */
     private static final long THREAD_INTERVAL = 100L;
 
+    /**
+     * Thread which works separately next to Swing EDT. Thanks that it doesn't cause GUI freezing.
+     * Responsibility of this thread is to periodically send requests and retrieve data packages with information necessary for GUI update.
+     * @param player determine for which player message is addressed.
+     */
     public void execute(Player player) {
         SwingWorker<Void, BoardsMessage> backgroundThread = new SwingWorker<Void, BoardsMessage>() {
 

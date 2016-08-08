@@ -38,6 +38,9 @@ public class BattleshipMainFrame {
         }
     };
 
+    /**
+     * After bean creation this method will be invoked, create initial GUI components and make them visible
+     */
     @PostConstruct
     public void show() {
         setMainFrameProperties();
