@@ -1,5 +1,6 @@
 package configuration;
 
+import gameLogic.ShipManager;
 import gui.BattleshipMainFrame;
 import gui.panels.boards.BoardsFactory;
 import gui.panels.boards.RivalBoardGui;
@@ -9,16 +10,22 @@ import gui.panels.boards.belowPanels.BelowPanelsListenerFactory;
 import gui.panels.boards.belowPanels.UserBelowPanel;
 import gui.panels.buttons.ButtonsPanelFactory;
 import gui.panels.buttons.ListenersFactory;
-import gameLogic.ShipManager;
 import gui.services.Publisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import services.shared.*;
 import workers.UserBackgroundThread;
 
 @Configuration
+@PropertySource("classpath:config.properties")
 public class ClientConfiguration {
+
+    @Autowired
+    private Environment environment;
 
     @Bean
     public BattleshipMainFrame mainFrame() {
@@ -84,7 +91,7 @@ public class ClientConfiguration {
     @Bean
     public HttpInvokerProxyFactoryBean shipGeneratorHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.SHIP_GENERATOR_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.SHIP_GENERATOR_SERVICE;
         httpInvoker.setServiceInterface(ShipGeneratorService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
@@ -93,7 +100,7 @@ public class ClientConfiguration {
     @Bean
     public HttpInvokerProxyFactoryBean boardMessageHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.BOARD_MESSAGE_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.BOARD_MESSAGE_SERVICE;
         httpInvoker.setServiceInterface(BoardsMessageService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
@@ -102,7 +109,7 @@ public class ClientConfiguration {
     @Bean
     public HttpInvokerProxyFactoryBean playerRegistrationHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.PLAYER_REGISTRATION_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.PLAYER_REGISTRATION_SERVICE;
         httpInvoker.setServiceInterface(PlayerRegistrationService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
@@ -111,7 +118,7 @@ public class ClientConfiguration {
     @Bean
     public HttpInvokerProxyFactoryBean gameInitHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.GAME_INIT_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.GAME_INIT_SERVICE;
         httpInvoker.setServiceInterface(GameInitService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
@@ -120,7 +127,7 @@ public class ClientConfiguration {
     @Bean
     public HttpInvokerProxyFactoryBean shootServiceHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.SHOOT_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.SHOOT_SERVICE;
         httpInvoker.setServiceInterface(ShootService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
@@ -129,15 +136,16 @@ public class ClientConfiguration {
     @Bean
     public HttpInvokerProxyFactoryBean endGameServiceHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.END_GAME_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.END_GAME_SERVICE;
         httpInvoker.setServiceInterface(EndGameService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
+
     @Bean
     public HttpInvokerProxyFactoryBean mainFramePositionServiceHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.MAIN_FRAME_POSITION_SERVICE;
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.MAIN_FRAME_POSITION_SERVICE;
         httpInvoker.setServiceInterface(MainFramePositionService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;

@@ -97,7 +97,7 @@ public class ListenersFactory {
 
     private ActionListener rulesAction() {
         return e -> {
-            ImageIcon rulesIcon = new ImageIcon(getClass().getResource("/GameRules.jpg"));
+            ImageIcon rulesIcon = new ImageIcon(getClass().getResource("/img/GameRules.jpg"));
             JOptionPane.showConfirmDialog(null, rulesIcon, "Rules", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE);
         };
     }
