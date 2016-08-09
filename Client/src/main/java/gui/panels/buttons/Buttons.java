@@ -8,7 +8,7 @@ public enum Buttons {
     FourShoots("4 shoots", false), ThreeShoots("3 shoots", false), TwoShoots("2 shoots", false);
 
     private boolean isPermanentlyDisabled;
-    private JButton button;
+    private final JButton button;
 
     Buttons(String title, boolean isEnabledAtStart) {
         button = new JButton(title);

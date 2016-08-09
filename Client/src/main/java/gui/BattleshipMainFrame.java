@@ -3,7 +3,6 @@ package gui;
 import configuration.Config;
 import gui.panels.boards.BoardsFactory;
 import gui.panels.buttons.ButtonsPanelFactory;
-import gui.services.BoardPanelType;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.shared.MainFramePositionService;
 import services.shared.PlayerRegistrationService;
@@ -28,9 +27,9 @@ public class BattleshipMainFrame {
     @Autowired
     private MainFramePositionService mainFramePositionService;
 
-    private JFrame battleshipMainFrame = new JFrame();
+    private final JFrame battleshipMainFrame = new JFrame();
 
-    private WindowAdapter windowAdapter = new WindowAdapter() {
+    private final WindowAdapter windowAdapter = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent event) {
             registrationService.unregisterPlayer();
@@ -60,7 +59,7 @@ public class BattleshipMainFrame {
     }
 
     private void addBoardsPanel() {
-        battleshipMainFrame.add(boardsFactory.getBoardPanel(BoardPanelType.Playing), BorderLayout.CENTER);
+        battleshipMainFrame.add(boardsFactory.getBoardPanel(), BorderLayout.CENTER);
     }
 
     private void addButtonsPanel() {

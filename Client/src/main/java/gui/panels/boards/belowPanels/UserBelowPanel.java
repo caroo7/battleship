@@ -3,7 +3,6 @@ package gui.panels.boards.belowPanels;
 import models.GameState;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,9 +11,9 @@ public class UserBelowPanel {
     @Autowired
     private BelowPanelsFactory belowPanelsFactory;
 
-    private JPanel userBelowPanel = new JPanel();
+    private final JPanel userBelowPanel = new JPanel();
 
-    private CardLayout belowCardLayout = new CardLayout();
+    private final CardLayout belowCardLayout = new CardLayout();
 
     /**
      * Return below client panel depends on actual fame state value. There are 3 possibilities:

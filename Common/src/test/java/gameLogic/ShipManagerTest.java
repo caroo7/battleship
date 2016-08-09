@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ShipManagerTest {
 
-    ShipManager shipManager = new ShipManager();
+    private final ShipManager shipManager = new ShipManager();
 
     @BeforeMethod
     private void initShips() {
@@ -37,7 +38,8 @@ public class ShipManagerTest {
     public void testAmountOfAliveShipsAFTERShooting() {
 
         // given
-        Ship toLinkWithCells = shipManager.getAllShips().stream().findFirst().get();
+        Optional<Ship> firstShip = shipManager.getAllShips().stream().findFirst();
+        Ship toLinkWithCells = firstShip.isPresent() ? firstShip.get() : null;
         Cell toSunk1 = Cell.createCellWithShip(toLinkWithCells);
         Cell toSunk2 = Cell.createCellWithShip(toLinkWithCells);
 

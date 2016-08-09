@@ -22,7 +22,7 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
      */
     private Set<Point> invalidShipsCoordinates;
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     /**
      * Board edge size (e.g. 8 means that board has 8x8 size)
@@ -50,12 +50,12 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
     }
 
 
-    private void generateShip(int shipLenght) {
+    private void generateShip(int shipLength) {
         Point point;
         do {
             point = new Point(random.nextInt(BOARD_SIZE), random.nextInt(BOARD_SIZE));
         }
-        while (!(random.nextInt(2) == 1 ? generateVerticalShip(point, shipLenght) : generateHorizontalShip(point, shipLenght)));
+        while (!(random.nextInt(2) == 1 ? generateVerticalShip(point, shipLength) : generateHorizontalShip(point, shipLength)));
 
     }
 

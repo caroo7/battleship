@@ -14,13 +14,10 @@ import workers.UserBackgroundThread;
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ListenersFactory {
-    private Map<Buttons, ActionListener> listeners = new HashMap<>();
+    private final Map<Buttons, ActionListener> listeners = new HashMap<>();
 
     @Autowired
     private UserBackgroundThread backgroundThread;
@@ -86,7 +83,7 @@ public class ListenersFactory {
 
             gameInitService.initGame(player, shipManager);
             backgroundThread.execute(player);
-            userBoard.updateGeneratedShips(Collections.EMPTY_SET);
+            userBoard.updateGeneratedShips(Collections.emptySet());
             Buttons.Generate.setEnabled(false);
             Buttons.Start.setEnabled(false);
             Buttons.FourShoots.setEnabled(true);
@@ -98,6 +95,7 @@ public class ListenersFactory {
     private ActionListener rulesAction() {
         return e -> {
             ImageIcon rulesIcon = new ImageIcon(getClass().getResource("/img/GameRules.jpg"));
+            //this you may ignore despite IDEA flagging it
             JOptionPane.showConfirmDialog(null, rulesIcon, "Rules", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE);
         };
     }
@@ -122,4 +120,5 @@ public class ListenersFactory {
             Buttons.TwoShoots.setPermanentlyDisabled();
         };
     }
+
 }

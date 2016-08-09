@@ -31,7 +31,7 @@ public class PlayerRegistrationServiceImpl implements PlayerRegistrationService 
         return player;
     }
 
-    private boolean canPlayerConnect() throws PlayerRegistrationException {
+    private boolean canPlayerConnect() {
         return ++connectedPlayersCounter <= MAX_NUMBERS_OF_PLAYERS;
     }
 

@@ -13,10 +13,10 @@ import java.util.Map;
  * according to rules of changing.
  */
 
-public class Cell {
+class Cell {
 
     private CellState state;
-    private Map<CellState, CellState> rulesOfChangingState;
+    private final Map<CellState, CellState> rulesOfChangingState;
 
     {
         rulesOfChangingState = new HashMap<>();

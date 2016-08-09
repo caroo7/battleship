@@ -16,17 +16,17 @@ public class TestAliveShipsService {
     public void testAmountOfAliveShips() throws Exception {
 
         //given
-        Board firstPlayerboard = prepareBoardWith4AliveShips();
+        Board firstPlayerBoard = prepareBoardWith4AliveShips();
 
-        Board secondPlayerboard = prepareBoardWith4AliveShips();
-        secondPlayerboard.representBoardStateAfterClickingOn(new Point(0, 0));
-        secondPlayerboard.representBoardStateAfterClickingOn(new Point(0, 1));
-        secondPlayerboard.representBoardStateAfterClickingOn(new Point(0, 4));
-        secondPlayerboard.representBoardStateAfterClickingOn(new Point(3, 3));
+        Board secondPlayerBoard = prepareBoardWith4AliveShips();
+        secondPlayerBoard.representBoardStateAfterClickingOn(new Point(0, 0));
+        secondPlayerBoard.representBoardStateAfterClickingOn(new Point(0, 1));
+        secondPlayerBoard.representBoardStateAfterClickingOn(new Point(0, 4));
+        secondPlayerBoard.representBoardStateAfterClickingOn(new Point(3, 3));
 
         AliveShipsServiceImpl aliveShipsService = new AliveShipsServiceImpl();
-        aliveShipsService.firstPlayerBoard = firstPlayerboard;
-        aliveShipsService.secondPlayerBoard = secondPlayerboard;
+        aliveShipsService.firstPlayerBoard = firstPlayerBoard;
+        aliveShipsService.secondPlayerBoard = secondPlayerBoard;
 
         //when
         long amountOfFirstPlayerShips = aliveShipsService.getRivalAliveAmountOfShips(Player.SECOND);
@@ -38,10 +38,9 @@ public class TestAliveShipsService {
     }
 
     @Test(expectedExceptions = Exception.class)
-    public void testExeptionNullShipManager() throws Exception {
+    public void testExceptionNullShipManager() throws Exception {
 
         //given
-        Board board = new Board();
         AliveShipsServiceImpl aliveShipsService = new AliveShipsServiceImpl();
 
         //when

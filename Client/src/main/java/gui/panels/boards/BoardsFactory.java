@@ -26,7 +26,7 @@ public class BoardsFactory {
     @Autowired
     private Publisher boardPublisher;
 
-    private Map<BoardPanelType, JPanel> boards = new HashMap<>();
+    private final Map<BoardPanelType, JPanel> boards = new HashMap<>();
 
     /**
      * set proper boards publishers for panel and after that add user and rival boards to the main panel
@@ -36,8 +36,8 @@ public class BoardsFactory {
         initBoardsMap();
     }
 
-    public JPanel getBoardPanel(BoardPanelType boardPanelType) {
-        return boards.getOrDefault(boardPanelType, new JPanel());
+    public JPanel getBoardPanel() {
+        return boards.getOrDefault(BoardPanelType.Playing, new JPanel());
     }
 
     private void initBoardsMap() {

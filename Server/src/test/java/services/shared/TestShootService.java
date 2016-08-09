@@ -15,8 +15,8 @@ import static org.mockito.Mockito.verify;
 
 public class TestShootService {
 
-    ShootServiceImpl shootService;
-    ActualPlayerServiceImpl actualPlayerService;
+    private ShootServiceImpl shootService;
+    private ActualPlayerServiceImpl actualPlayerService;
 
     @BeforeMethod
     private void prepareShootService() {

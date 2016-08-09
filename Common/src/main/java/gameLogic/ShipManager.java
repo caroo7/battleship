@@ -2,6 +2,7 @@ package gameLogic;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.function.Function;
@@ -35,7 +36,7 @@ public class ShipManager implements Serializable {
      * @return {@link java.util.Set} of {@link java.awt.Point},which represents points of sunk ship including point from method argument.
      */
     Set<Point> getPointsOfSunkShip(Point point) {
-        return getSetOf(point, ship -> ship.getCoordinates());
+        return getSetOf(point, Ship::getCoordinates);
     }
 
     /**
@@ -44,7 +45,7 @@ public class ShipManager implements Serializable {
      * @return {@link java.util.Set} of {@link java.awt.Point},which represents points of sunk ship including point from method argument.
      */
     Set<Point> getPointsAroundSunkShip(Point point) {
-        return getSetOf(point,ship -> ship.getNeighbours());
+        return getSetOf(point, Ship::getNeighbours);
     }
 
     private Set<Point> getSetOf( Point point, Function<Ship,Set<Point>> mapper) {
@@ -52,7 +53,7 @@ public class ShipManager implements Serializable {
         return ships.stream()
                 .filter(ship -> ship.containsPoint(point))
                 .map(mapper)
-                .flatMap(set -> set.stream())
+                .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
 

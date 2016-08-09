@@ -10,7 +10,7 @@ import java.awt.*;
 
 abstract class BoardGui extends JPanel implements Subscriber {
 
-    PlayingArea playingArea = new PlayingArea();
+    final PlayingArea playingArea = new PlayingArea();
 
     abstract BoardGui addTitles();
 

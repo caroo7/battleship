@@ -4,7 +4,6 @@ import gui.services.Publisher;
 import models.BoardsMessage;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.remoting.RemoteConnectFailureException;
 import services.shared.BoardsMessageService;
 import services.shared.EndGameService;
 
@@ -66,7 +65,7 @@ public class UserBackgroundThread {
         backgroundThread.execute();
     }
 
-    private void closeIfGameWasEnded(BoardsMessage actualMessage) throws Exception {
+    private void closeIfGameWasEnded(BoardsMessage actualMessage) {
         if (!actualMessage.isGameAvailable()) {
             endGameService.endGame();
         }

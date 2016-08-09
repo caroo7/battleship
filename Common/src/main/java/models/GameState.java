@@ -4,7 +4,7 @@ public enum GameState {
 
     NotYourTurn(false), YouCanPlay(true), YouArePlaying(true);
 
-    private boolean buttonsActivity;
+    private final boolean buttonsActivity;
 
     GameState(boolean buttonsActivity) {
         this.buttonsActivity = buttonsActivity;

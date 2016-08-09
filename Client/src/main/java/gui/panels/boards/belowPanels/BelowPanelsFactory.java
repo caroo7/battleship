@@ -13,7 +13,7 @@ public class BelowPanelsFactory {
     @Autowired
     private BelowPanelsListenerFactory belowPanelsListenerFactory;
 
-    private Map<GameState, JPanel> belowPanels = new HashMap<>();
+    private final Map<GameState, JPanel> belowPanels = new HashMap<>();
 
     /**
      * Initialize panels which will be displayed using card layout later (based on game state value)

@@ -1,7 +1,5 @@
 package services.shared;
 
-import org.springframework.remoting.RemoteConnectFailureException;
-
 /**
  * Service responsible for immediately application server side close
  */

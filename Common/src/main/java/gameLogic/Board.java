@@ -1,16 +1,15 @@
 package gameLogic;
 
 import java.awt.*;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import static gameLogic.CellState.AROUNDSUNK;
 import static gameLogic.CellState.SUNK;
 
 /**
- * Class {@Board} represents game board for Battleship game.
+ * Class {@code Board} represents game board for Battleship game.
  *It has reference to {@link ShipManager} shipManager, which works with ships
  * and <b>cells</b> field, which represents state of the game in terms of {@link Cell}.
  */

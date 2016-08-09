@@ -3,14 +3,9 @@ package gameLogic;
 import configuration.Config;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static gameLogic.CellState.*;
-import static gameLogic.CellState.AROUNDSUNK;
-import static gameLogic.CellState.SHOOTEDEMPTY;
 
 public class ShipsUtility {
 
@@ -35,19 +30,13 @@ public class ShipsUtility {
         return result;
     }
 
-    public static Ship createShipWithoutNeighbours(Point ... point) {
+    public static Ship createShipWithoutNeighbours(Point... points) {
         Set<Point> coordinates = new HashSet<>();
-        for (int i = 0; i < point.length; i++) {
-            coordinates.add(point[i]);
-        }
+        Arrays.stream(points).forEach(coordinates::add);
         return new Ship(coordinates, null);
     }
 
-   public static Ship createShipWithNeighbours(Set<Point> ship, Set<Point> neighbours) {
-       return new Ship(ship,neighbours);
-    }
-
-    public static Set<Ship> getSetOf4Ships(){
+    public static Set<Ship> getSetOf4Ships() {
         Set<Ship> ships = new HashSet<>();
 
         Set<Point> firstShipPoints = new HashSet<>();
@@ -80,32 +69,32 @@ public class ShipsUtility {
         ships.add(ShipsUtility.createShipWithNeighbours(secondShipPoints, secondShipNeighbours));
 
         Set<Point> thirdShipPoints = new HashSet<>();
-        thirdShipPoints.add(new Point(6,0));
+        thirdShipPoints.add(new Point(6, 0));
         Set<Point> thirdShipNeighbours = new HashSet<>();
-        thirdShipNeighbours.add(new Point(5,0));
-        thirdShipNeighbours.add(new Point(7,0));
-        thirdShipNeighbours.add(new Point(5,1));
-        thirdShipNeighbours.add(new Point(6,1));
-        thirdShipNeighbours.add(new Point(7,1));
-        ships.add(ShipsUtility.createShipWithNeighbours(thirdShipPoints,thirdShipNeighbours));
+        thirdShipNeighbours.add(new Point(5, 0));
+        thirdShipNeighbours.add(new Point(7, 0));
+        thirdShipNeighbours.add(new Point(5, 1));
+        thirdShipNeighbours.add(new Point(6, 1));
+        thirdShipNeighbours.add(new Point(7, 1));
+        ships.add(ShipsUtility.createShipWithNeighbours(thirdShipPoints, thirdShipNeighbours));
 
         Set<Point> fourthShipPoints = new HashSet<>();
         fourthShipPoints.add(new Point(6, 2));
         Set<Point> fourthShipNeighbours = new HashSet<>();
-        fourthShipNeighbours.add(new Point(5,1));
-        fourthShipNeighbours.add(new Point(5,2));
-        fourthShipNeighbours.add(new Point(5,3));
-        fourthShipNeighbours.add(new Point(6,1));
-        fourthShipNeighbours.add(new Point(6,3));
-        fourthShipNeighbours.add(new Point(7,1));
-        fourthShipNeighbours.add(new Point(7,2));
-        fourthShipNeighbours.add(new Point(7,3));
-        ships.add(ShipsUtility.createShipWithNeighbours(fourthShipPoints,fourthShipNeighbours));
+        fourthShipNeighbours.add(new Point(5, 1));
+        fourthShipNeighbours.add(new Point(5, 2));
+        fourthShipNeighbours.add(new Point(5, 3));
+        fourthShipNeighbours.add(new Point(6, 1));
+        fourthShipNeighbours.add(new Point(6, 3));
+        fourthShipNeighbours.add(new Point(7, 1));
+        fourthShipNeighbours.add(new Point(7, 2));
+        fourthShipNeighbours.add(new Point(7, 3));
+        ships.add(ShipsUtility.createShipWithNeighbours(fourthShipPoints, fourthShipNeighbours));
 
         return ships;
     }
 
-    public static Map<Point, CellState> getRealBoardStateBeforeShooting(){
+    public static Map<Point, CellState> getRealBoardStateBeforeShooting() {
         Map<Point, CellState> result = createEmptyBoard();
         result.put(new Point(0, 0), SHIP);
         result.put(new Point(0, 1), SHIP);
@@ -173,5 +162,9 @@ public class ShipsUtility {
             }
         }
         return result;
+    }
+
+    private static Ship createShipWithNeighbours(Set<Point> ship, Set<Point> neighbours) {
+        return new Ship(ship, neighbours);
     }
 }

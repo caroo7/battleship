@@ -22,9 +22,9 @@ public class RivalBoardGui extends BoardGui {
 
     private long shipsLeft;
 
-    private int CURSOR_HEIGHT = 15;
+    private final int CURSOR_HEIGHT = 15;
 
-    private int CURSOR_WIDTH = 5;
+    private final int CURSOR_WIDTH = 5;
 
     private GameState isGamePlayed = GameState.NotYourTurn;
 

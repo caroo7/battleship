@@ -1,18 +1,18 @@
 package models;
 
-import java.awt.*;
 import gameLogic.CellState;
+
+import java.awt.*;
 import java.io.Serializable;
 import java.util.Map;
 
 public final class BoardsMessage implements Serializable {
 
-    private boolean isGameAvailable;
-    private GameState userGameState;
-    private GameState gameState;
-    private Map<Point, CellState> actualUserBoardStates;
-    private Map<Point, CellState> actualRivalBoardState;
-    private long rivalShipsLeft;
+    private final boolean isGameAvailable;
+    private final GameState userGameState;
+    private final Map<Point, CellState> actualUserBoardStates;
+    private final Map<Point, CellState> actualRivalBoardState;
+    private final long rivalShipsLeft;
 
     public BoardsMessage(boolean isGameAvailable, GameState userGameState, Map<Point, CellState> actualUserBoardStates, Map<Point, CellState> actualRivalBoardState, long rivalShipsLeft) {
         this.isGameAvailable = isGameAvailable;

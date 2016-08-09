@@ -16,12 +16,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import services.undisclosed.ActualPlayerServiceImpl;
-import services.undisclosed.AliveShipsServiceImpl;
-import services.undisclosed.BoardStateServiceImpl;
-import services.undisclosed.GameAvailableServiceImpl;
 
 import java.awt.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertEquals;
 
 
@@ -29,41 +27,43 @@ import static org.testng.Assert.assertEquals;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
 
-
-    BoardsMessageService boardsMessageService;
-    ShootService shootService;
+    @Autowired
+    private ApplicationContext context;
 
     @Autowired
-    ApplicationContext context;
+    private BoardsMessageService boardsMessageService;
+
+    @Autowired
+    private ShootService shootService;
+
+    @Autowired
+    private Board firstPlayerBoard;
+
+    @Autowired
+    private Board secondPlayerBoard;
+
+    @Autowired
+    private ActualPlayerServiceImpl actualPlayerService;
+
+    @Autowired
+    private PlayerRegistrationService registrationService;
 
     @BeforeMethod
     public void prepareBoardsMessageService() throws Exception {
+        registrationService.registerPlayer();
+        firstPlayerBoard.init(createShipManagerForBoard());
 
-        ShipManager firstShipManager = new ShipManager();
-        firstShipManager.initShips(ShipsUtility.getSetOf4Ships());
-        Board firstPlayerBoard = (Board) context.getBean("firstPlayerBoard");
-        firstPlayerBoard.init(firstShipManager);
+        registrationService.registerPlayer();
+        secondPlayerBoard.init(createShipManagerForBoard());
 
-        ShipManager secondShipManager = new ShipManager();
-        secondShipManager.initShips(ShipsUtility.getSetOf4Ships());
-        Board secondPlayerBoard = (Board) context.getBean("secondPlayerBoard");
-        secondPlayerBoard.init(secondShipManager);
-
-        ActualPlayerServiceImpl actualPlayerService = (ActualPlayerServiceImpl) context.getBean("actualPlayerService");
         actualPlayerService.setActualPlayerAsFirstPlayerAtStart();
-
-        PlayerRegistrationService playerRegistrationService = (PlayerRegistrationService) context.getBean("playerRegistrationService");
-        playerRegistrationService.registerPlayer();
-        playerRegistrationService.registerPlayer();
-
-        GameAvailableServiceImpl gameAvailableService = (GameAvailableServiceImpl) context.getBean("gameAvailableService");
-        BoardStateServiceImpl boardStateService = (BoardStateServiceImpl) context.getBean("boardStateService");
-        AliveShipsServiceImpl aliveShipsService = (AliveShipsServiceImpl) context.getBean("aliveShipsService");
-        this.boardsMessageService = (BoardsMessageService) context.getBean("boardMessageService");
-
-        this.shootService = (ShootService) context.getBean("shootService");
     }
 
+    private ShipManager createShipManagerForBoard() {
+        ShipManager shipManager = new ShipManager();
+        shipManager.initShips(ShipsUtility.getSetOf4Ships());
+        return shipManager;
+    }
 
     @Test
     public void testTheMessageBeforeShooting() throws Exception {
@@ -74,6 +74,7 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         BoardsMessage boardsMessage = boardsMessageService.retrieveDataForUser(Player.FIRST);
 
         //then
+        //TODO: soft assert
         assertEquals(boardsMessage.isGameAvailable(), true);
         assertEquals(boardsMessage.getUserGameState(), GameState.YouCanPlay);
         assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.createEmptyBoard());
@@ -100,6 +101,9 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         //then
         SoftAssert sa = new SoftAssert();
         // first player
+        //TODO: consider assertJ or your own custom assertion at least
+        assertThat(boardsMessage1.getActualRivalBoardState()).as("board 1 actual rival board is not null").isNotEmpty();
+
         sa.assertEquals(boardsMessage1.isGameAvailable(), true, "game availability is wrong for First player");
         sa.assertEquals(boardsMessage1.getUserGameState(), GameState.NotYourTurn, "player's turn is wrong for First player");
         sa.assertEquals(boardsMessage1.getActualRivalBoardState(), ShipsUtility.getRepresentationOfBoardStateAfterShootingVar1(), "Wrong representation of rival's board for First Player");

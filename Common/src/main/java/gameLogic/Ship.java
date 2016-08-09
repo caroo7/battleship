@@ -14,8 +14,8 @@ import java.util.Set;
  */
 public class Ship implements Serializable {
 
-    private Set<Point> coordinates;
-    private Set<Point> neighbours;
+    private final Set<Point> coordinates;
+    private final Set<Point> neighbours;
     private int alivePartOfShipLeft;
 
 

@@ -7,14 +7,13 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class ShipTest {
 
-    Set<Point> points = new HashSet<>();
-    Ship ship;
+    private final Set<Point> points = new HashSet<>();
+    private Ship ship;
 
     @BeforeMethod
     private void prepareShip() {
