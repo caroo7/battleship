@@ -7,6 +7,7 @@ import gameLogic.ShipsUtility;
 import models.BoardsMessage;
 import models.GameState;
 import models.Player;
+import org.assertj.core.api.SoftAssertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
@@ -74,18 +75,19 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         BoardsMessage boardsMessage = boardsMessageService.retrieveDataForUser(Player.FIRST);
 
         //then
-        //TODO: soft assert
-        assertEquals(boardsMessage.isGameAvailable(), true);
-        assertEquals(boardsMessage.getUserGameState(), GameState.YouCanPlay);
-        assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.createEmptyBoard());
-        assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getRealBoardStateBeforeShooting());
-        assertEquals(boardsMessage.getRivalShipsLeft(), 4);
+        SoftAssert sa =new SoftAssert();
+        sa.assertEquals(boardsMessage.isGameAvailable(), true);
+        sa.assertEquals(boardsMessage.getUserGameState(), GameState.YouCanPlay);
+        sa.assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.createEmptyBoard());
+        sa.assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getRealBoardStateBeforeShooting());
+        sa.assertEquals(boardsMessage.getRivalShipsLeft(), 4);
+        sa.assertAll();
     }
 
     @Test
     public void testTheMessageAfterShooting() throws Exception {
 
-        //given
+        //given BeforeMethod and
         // first player
         shootService.shootOn(new Point(0, 0));
         shootService.shootOn(new Point(0, 1));
@@ -99,22 +101,19 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         BoardsMessage boardsMessage2 = boardsMessageService.retrieveDataForUser(Player.SECOND);
 
         //then
-        SoftAssert sa = new SoftAssert();
+        SoftAssertions sa = new SoftAssertions();
         // first player
-        //TODO: consider assertJ or your own custom assertion at least
-        assertThat(boardsMessage1.getActualRivalBoardState()).as("board 1 actual rival board is not null").isNotEmpty();
-
-        sa.assertEquals(boardsMessage1.isGameAvailable(), true, "game availability is wrong for First player");
-        sa.assertEquals(boardsMessage1.getUserGameState(), GameState.NotYourTurn, "player's turn is wrong for First player");
-        sa.assertEquals(boardsMessage1.getActualRivalBoardState(), ShipsUtility.getRepresentationOfBoardStateAfterShootingVar1(), "Wrong representation of rival's board for First Player");
-        sa.assertEquals(boardsMessage1.getActualUserBoardStates(), ShipsUtility.getRealBoardStateAfterShootingVar2(), "wrong REAL board state for First player");
-        sa.assertEquals(boardsMessage1.getRivalShipsLeft(), 3, "wrong amount of alive rival ships for First Player");
+        sa.assertThat(boardsMessage1.isGameAvailable()).as("Is game available for FIRST player").isTrue();
+        sa.assertThat(boardsMessage1.getActualRivalBoardState()).as("rival board for player FIRST").isEqualTo(ShipsUtility.getRepresentationOfBoardStateAfterShootingVar1());
+        sa.assertThat(boardsMessage1.getUserGameState()).as("game state foe FIRST player").isEqualTo(GameState.NotYourTurn);
+        sa.assertThat(boardsMessage1.getActualUserBoardStates()).as("user board state for FIRST player").isEqualTo(ShipsUtility.getRealBoardStateAfterShootingVar2());
+        sa.assertThat(boardsMessage1.getRivalShipsLeft()).as("amount of alive rival ships for First Player").isEqualTo(3);
         // second player
-        sa.assertEquals(boardsMessage2.isGameAvailable(), true, "game availability is wrong for Second player");
-        sa.assertEquals(boardsMessage2.getUserGameState(), GameState.YouCanPlay, "player's turn is wrong for Second player");
-        sa.assertEquals(boardsMessage2.getActualRivalBoardState(), ShipsUtility.getRepresentationOfBoardStateAfterShootingVar2(), "Wrong representation of rival's board for Second Player");
-        sa.assertEquals(boardsMessage2.getActualUserBoardStates(), ShipsUtility.getRealBoardStateAfterShootingVar1(), "wrong REAL board state for Second player");
-        sa.assertEquals(boardsMessage2.getRivalShipsLeft(), 3, "wrong amount of alive rival ships for Second Player");
+        sa.assertThat(boardsMessage2.isGameAvailable()).as("Is game available for SECOND player").isTrue();
+        sa.assertThat(boardsMessage2.getActualRivalBoardState()).as("rival board for player SECOND").isEqualTo(ShipsUtility.getRepresentationOfBoardStateAfterShootingVar2());
+        sa.assertThat(boardsMessage2.getUserGameState()).as("game state foe SECOND player").isEqualTo(GameState.YouCanPlay);
+        sa.assertThat(boardsMessage2.getActualUserBoardStates()).as("user board state for SECOND player").isEqualTo(ShipsUtility.getRealBoardStateAfterShootingVar1());
+        sa.assertThat(boardsMessage2.getRivalShipsLeft()).as("amount of alive rival ships for First Player").isEqualTo(3);
         sa.assertAll();
     }
 
