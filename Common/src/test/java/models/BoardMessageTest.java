@@ -1,7 +1,8 @@
 package models;
 
 import gameLogic.CellState;
-import gameLogic.ShipsUtility;
+
+import gameLogic.ShipsUtilityOnlyForTests;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,8 +17,8 @@ public class BoardMessageTest {
         //given
         BoardsMessage boardsMessage = new BoardsMessage(true,
                 GameState.YouArePlaying,
-                ShipsUtility.getRealBoardStateBeforeShooting(),
-                ShipsUtility.getRealBoardStateBeforeShooting(),
+                ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting(),
+                ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting(),
                 4);
 
         //when
@@ -25,13 +26,15 @@ public class BoardMessageTest {
         GameState gameState = boardsMessage.getUserGameState();
         Map<Point, CellState> rivalBoardState = boardsMessage.getActualRivalBoardState();
         Map<Point, CellState> userBoardState = boardsMessage.getActualUserBoardStates();
+        long aliveShips = boardsMessage.getRivalShipsLeft();
 
         //then
         SoftAssert sa = new SoftAssert();
         sa.assertTrue(isGameAvailable);
         sa.assertEquals(gameState, GameState.YouArePlaying);
-        sa.assertEquals(rivalBoardState, ShipsUtility.getRealBoardStateBeforeShooting());
-        sa.assertEquals(userBoardState, ShipsUtility.getRealBoardStateBeforeShooting());
+        sa.assertEquals(rivalBoardState, ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting());
+        sa.assertEquals(userBoardState, ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting());
+        sa.assertEquals(aliveShips,4);
         sa.assertAll();
     }
 }

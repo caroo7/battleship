@@ -3,7 +3,7 @@ package services.shared.board;
 import configuration.ServerConfiguration;
 import gameLogic.Board;
 import gameLogic.ShipManager;
-import gameLogic.ShipsUtility;
+import gameLogic.ShipsUtilityOnlyForTests;
 import models.BoardsMessage;
 import models.GameState;
 import models.Player;
@@ -65,7 +65,7 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
 
     private ShipManager createShipManagerForBoard() {
         ShipManager shipManager = new ShipManager();
-        shipManager.initShips(ShipsUtility.getSetOf4Ships());
+        shipManager.initShips(ShipsUtilityOnlyForTests.getSetOf4Ships());
         return shipManager;
     }
 
@@ -81,8 +81,8 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         SoftAssert sa =new SoftAssert();
         sa.assertEquals(boardsMessage.isGameAvailable(), true);
         sa.assertEquals(boardsMessage.getUserGameState(), GameState.YouCanPlay);
-        sa.assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtility.createEmptyBoard());
-        sa.assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtility.getRealBoardStateBeforeShooting());
+        sa.assertEquals(boardsMessage.getActualRivalBoardState(), ShipsUtilityOnlyForTests.createEmptyBoard());
+        sa.assertEquals(boardsMessage.getActualUserBoardStates(), ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting());
         sa.assertEquals(boardsMessage.getRivalShipsLeft(), 4);
         sa.assertAll();
     }
@@ -107,15 +107,15 @@ public class TestBoardMessageService extends AbstractTestNGSpringContextTests {
         SoftAssertions sa = new SoftAssertions();
         // first player
         sa.assertThat(boardsMessage1.isGameAvailable()).as("Is game available for FIRST player").isTrue();
-        sa.assertThat(boardsMessage1.getActualRivalBoardState()).as("rival board for player FIRST").isEqualTo(ShipsUtility.getRepresentationOfBoardStateAfterShootingVar1());
+        sa.assertThat(boardsMessage1.getActualRivalBoardState()).as("rival board for player FIRST").isEqualTo(ShipsUtilityOnlyForTests.getRepresentationOfBoardStateAfterShootingVar1());
         sa.assertThat(boardsMessage1.getUserGameState()).as("game state foe FIRST player").isEqualTo(GameState.NotYourTurn);
-        sa.assertThat(boardsMessage1.getActualUserBoardStates()).as("user board state for FIRST player").isEqualTo(ShipsUtility.getRealBoardStateAfterShootingVar2());
+        sa.assertThat(boardsMessage1.getActualUserBoardStates()).as("user board state for FIRST player").isEqualTo(ShipsUtilityOnlyForTests.getRealBoardStateAfterShootingVar2());
         sa.assertThat(boardsMessage1.getRivalShipsLeft()).as("amount of alive rival ships for First Player").isEqualTo(3);
         // second player
         sa.assertThat(boardsMessage2.isGameAvailable()).as("Is game available for SECOND player").isTrue();
-        sa.assertThat(boardsMessage2.getActualRivalBoardState()).as("rival board for player SECOND").isEqualTo(ShipsUtility.getRepresentationOfBoardStateAfterShootingVar2());
+        sa.assertThat(boardsMessage2.getActualRivalBoardState()).as("rival board for player SECOND").isEqualTo(ShipsUtilityOnlyForTests.getRepresentationOfBoardStateAfterShootingVar2());
         sa.assertThat(boardsMessage2.getUserGameState()).as("game state foe SECOND player").isEqualTo(GameState.YouCanPlay);
-        sa.assertThat(boardsMessage2.getActualUserBoardStates()).as("user board state for SECOND player").isEqualTo(ShipsUtility.getRealBoardStateAfterShootingVar1());
+        sa.assertThat(boardsMessage2.getActualUserBoardStates()).as("user board state for SECOND player").isEqualTo(ShipsUtilityOnlyForTests.getRealBoardStateAfterShootingVar1());
         sa.assertThat(boardsMessage2.getRivalShipsLeft()).as("amount of alive rival ships for First Player").isEqualTo(3);
         sa.assertAll();
     }

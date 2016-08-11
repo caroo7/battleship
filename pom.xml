@@ -7,7 +7,7 @@
     <groupId>github.unsinkable</groupId>
     <artifactId>battleship</artifactId>
     <packaging>pom</packaging>
-    <version>1.1</version>
+    <version>1.0</version>
     <description>Battleship game for 2 players which contains 3 modules: client, server and common.</description>
     <organization>
         <name>Unsinkable</name>
@@ -90,7 +90,13 @@
                     <excludes>
                         <exclude>main/**/*.class</exclude>
                         <exclude>**/**/EndGameServiceImpl.class</exclude>
-                        <exclude>**/**/MainFramePositionServiceImpl.class</exclude>
+                        <exclude>**/Player.class</exclude>
+                        <exclude>**/GameState.class</exclude>
+                        <exclude>configuration/**/*.class</exclude>
+                        <exclude>exceptions/**/*.class</exclude>
+                        <exclude>**/ShipsUtilityOnlyForTests.class</exclude>
+                        <exclude>**/CellState.class</exclude>
+
                     </excludes>
                 </configuration>
                 <executions>

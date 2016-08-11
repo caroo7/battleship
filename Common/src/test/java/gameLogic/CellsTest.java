@@ -16,7 +16,7 @@ public class CellsTest {
     public void checkShootedCells() {
 
         // given
-        Cell cellWithShip = Cell.createCellWithShip(ShipsUtility.createShipWithoutNeighbours(new Point(0,0), new Point(0,1)));
+        Cell cellWithShip = Cell.createCellWithShip(ShipsUtilityOnlyForTests.createShipWithoutNeighbours(new Point(0,0), new Point(0,1)));
         Cell emptyCell = Cell.createEmptyCell();
 
         // when

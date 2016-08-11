@@ -2,7 +2,7 @@ package services.undisclosed;
 
 import gameLogic.Board;
 import gameLogic.ShipManager;
-import gameLogic.ShipsUtility;
+import gameLogic.ShipsUtilityOnlyForTests;
 import models.Player;
 import org.testng.annotations.Test;
 
@@ -51,7 +51,7 @@ public class TestAliveShipsService {
     private Board prepareBoardWith4AliveShips() {
         Board board = new Board();
         ShipManager shipManager = new ShipManager();
-        shipManager.initShips(ShipsUtility.getSetOf4Ships());
+        shipManager.initShips(ShipsUtilityOnlyForTests.getSetOf4Ships());
         board.init(shipManager);
         return board;
     }
