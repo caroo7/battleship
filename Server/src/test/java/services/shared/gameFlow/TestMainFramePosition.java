@@ -13,19 +13,19 @@ public class TestMainFramePosition {
 
     @Test
     void testMainFrameLocationForPlayers() {
-        //Arrange
+        //Given
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int widthGapBetweenFrames = (screenSize.width - 2 * Config.MAIN_FRAME_WIDTH) / 3;
         int heightGapBetweenFrames = (screenSize.height - Config.MAIN_FRAME_HEIGHT) / 2;
         Point expectedLocationForFirstPlayer = new Point(widthGapBetweenFrames, heightGapBetweenFrames);
         Point expectedLocationForSecondPlayer = new Point(2 * widthGapBetweenFrames + Config.MAIN_FRAME_WIDTH, heightGapBetweenFrames);
 
-        //Arrange
+        //When
         Point actualLocationForFirstPlayer = mainFramePositionService.getProperFrameLocation();
         Point actualLocationForSecondPlayer = mainFramePositionService.getProperFrameLocation();
 
 
-        //Assert
+        //Then
         assertEquals(actualLocationForFirstPlayer, expectedLocationForFirstPlayer);
         assertEquals(actualLocationForSecondPlayer, expectedLocationForSecondPlayer);
     }

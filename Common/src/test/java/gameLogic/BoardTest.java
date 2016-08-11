@@ -48,15 +48,15 @@ public class BoardTest {
     }
 
     private Set<Ship> prepareSetOfShips() {
-        return ShipsUtility.getSetOf4Ships();
+        return ShipsUtilityOnlyForTests.getSetOf4Ships();
     }
 
     private Map<Point, CellState> expectedStateAfterShooting() {
-        return ShipsUtility.getRealBoardStateAfterShootingVar1();
+        return ShipsUtilityOnlyForTests.getRealBoardStateAfterShootingVar1();
 
     }
 
     private Map<Point, CellState> expectedStateBeforeShooting() {
-         return ShipsUtility.getRealBoardStateBeforeShooting();
+         return ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting();
     }
 }

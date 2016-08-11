@@ -7,8 +7,6 @@ import services.undisclosed.ActualPlayerServiceImpl;
 
 public class TestPlayerRegistrationService {
 
-    //TODO parametrized testing
-
     @Test(expectedExceptions = Exception.class)
     public void testIfItsPossibleToAddMoreThenTwoPlayers() throws Exception {
 
@@ -20,6 +18,8 @@ public class TestPlayerRegistrationService {
         playerRegistrationService.registerPlayer();
         playerRegistrationService.registerPlayer();
         playerRegistrationService.registerPlayer();
+
+        //then Exception thrown
     }
 
     @Test

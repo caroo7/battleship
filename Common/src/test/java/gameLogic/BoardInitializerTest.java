@@ -14,7 +14,7 @@ public class BoardInitializerTest {
     public void testInitializingBoardWithFourShips() {
 
         //given and when
-        Map<Point, Cell> boardState = BoardInitializer.initBoard(ShipsUtility.getSetOf4Ships());
+        Map<Point, Cell> boardState = BoardInitializer.initBoard(ShipsUtilityOnlyForTests.getSetOf4Ships());
 
         //then
         assertEquals(boardState, expectedBoardState());

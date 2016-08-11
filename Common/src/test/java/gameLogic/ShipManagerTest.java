@@ -79,8 +79,8 @@ public class ShipManagerTest {
 
     private Set<Ship> prepareSetOsShips() {
         Set<Ship> ships = new HashSet<>();
-        ships.add(ShipsUtility.createShipWithoutNeighbours(new Point(0, 0), new Point(0, 1)));
-        ships.add(ShipsUtility.createShipWithoutNeighbours(new Point(2, 1), new Point(2, 2)));
+        ships.add(ShipsUtilityOnlyForTests.createShipWithoutNeighbours(new Point(0, 0), new Point(0, 1)));
+        ships.add(ShipsUtilityOnlyForTests.createShipWithoutNeighbours(new Point(2, 1), new Point(2, 2)));
         return ships;
     }
 

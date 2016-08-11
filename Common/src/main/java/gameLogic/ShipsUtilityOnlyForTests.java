@@ -7,7 +7,7 @@ import java.util.*;
 
 import static gameLogic.CellState.*;
 
-public class ShipsUtility {
+public class ShipsUtilityOnlyForTests {
 
     public static Map<Point, CellState> getRealBoardStateAfterShootingVar2() {
         Map<Point, CellState> result = createEmptyBoard();
@@ -47,7 +47,7 @@ public class ShipsUtility {
         firstShipNeighbours.add(new Point(1, 1));
         firstShipNeighbours.add(new Point(1, 2));
         firstShipNeighbours.add(new Point(0, 2));
-        ships.add(ShipsUtility.createShipWithNeighbours(firstShipPoints, firstShipNeighbours));
+        ships.add(ShipsUtilityOnlyForTests.createShipWithNeighbours(firstShipPoints, firstShipNeighbours));
 
         Set<Point> secondShipPoints = new HashSet<>();
         secondShipPoints.add(new Point(0, 4));
@@ -66,7 +66,7 @@ public class ShipsUtility {
         secondShipNeighbours.add(new Point(4, 3));
         secondShipNeighbours.add(new Point(4, 4));
         secondShipNeighbours.add(new Point(4, 5));
-        ships.add(ShipsUtility.createShipWithNeighbours(secondShipPoints, secondShipNeighbours));
+        ships.add(ShipsUtilityOnlyForTests.createShipWithNeighbours(secondShipPoints, secondShipNeighbours));
 
         Set<Point> thirdShipPoints = new HashSet<>();
         thirdShipPoints.add(new Point(6, 0));
@@ -76,7 +76,7 @@ public class ShipsUtility {
         thirdShipNeighbours.add(new Point(5, 1));
         thirdShipNeighbours.add(new Point(6, 1));
         thirdShipNeighbours.add(new Point(7, 1));
-        ships.add(ShipsUtility.createShipWithNeighbours(thirdShipPoints, thirdShipNeighbours));
+        ships.add(ShipsUtilityOnlyForTests.createShipWithNeighbours(thirdShipPoints, thirdShipNeighbours));
 
         Set<Point> fourthShipPoints = new HashSet<>();
         fourthShipPoints.add(new Point(6, 2));
@@ -89,7 +89,7 @@ public class ShipsUtility {
         fourthShipNeighbours.add(new Point(7, 1));
         fourthShipNeighbours.add(new Point(7, 2));
         fourthShipNeighbours.add(new Point(7, 3));
-        ships.add(ShipsUtility.createShipWithNeighbours(fourthShipPoints, fourthShipNeighbours));
+        ships.add(ShipsUtilityOnlyForTests.createShipWithNeighbours(fourthShipPoints, fourthShipNeighbours));
 
         return ships;
     }

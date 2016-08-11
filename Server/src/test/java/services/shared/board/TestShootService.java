@@ -2,10 +2,9 @@ package services.shared.board;
 
 import gameLogic.Board;
 import gameLogic.ShipManager;
-import gameLogic.ShipsUtility;
+import gameLogic.ShipsUtilityOnlyForTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import services.shared.board.ShootServiceImpl;
 import services.undisclosed.ActualPlayerServiceImpl;
 
 import java.awt.*;
@@ -25,7 +24,7 @@ public class TestShootService {
         actualPlayerService = mock(ActualPlayerServiceImpl.class);
         shootService.actualPlayerService = actualPlayerService;
         ShipManager shipManager = new ShipManager();
-        shipManager.initShips(ShipsUtility.getSetOf4Ships());
+        shipManager.initShips(ShipsUtilityOnlyForTests.getSetOf4Ships());
         Board board = new Board();
         board.init(shipManager);
         shootService.firstPlayerBoard = board;

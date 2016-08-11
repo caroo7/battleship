@@ -4,7 +4,7 @@ import configuration.ServerConfiguration;
 import gameLogic.Board;
 import gameLogic.CellState;
 import gameLogic.ShipManager;
-import gameLogic.ShipsUtility;
+import gameLogic.ShipsUtilityOnlyForTests;
 import models.Player;
 import org.assertj.core.api.SoftAssertions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class TestGameInitService extends AbstractTestNGSpringContextTests {
 
         //given
         ShipManager shipManager = new ShipManager();
-        shipManager.initShips(ShipsUtility.getSetOf4Ships());
+        shipManager.initShips(ShipsUtilityOnlyForTests.getSetOf4Ships());
         gameInitService.initGame(Player.FIRST, shipManager);
 
         //when
@@ -52,7 +52,7 @@ public class TestGameInitService extends AbstractTestNGSpringContextTests {
 
         //then
         SoftAssertions sa = new SoftAssertions();
-        sa.assertThat(firstPlayerBoardState).as("FIRST player board state after initialization").isEqualTo(ShipsUtility.getRealBoardStateBeforeShooting());
+        sa.assertThat(firstPlayerBoardState).as("FIRST player board state after initialization").isEqualTo(ShipsUtilityOnlyForTests.getRealBoardStateBeforeShooting());
         sa.assertThat(secondPlayerBoardState).as("SECOND player board should not be initialized").isEmpty();
         sa.assertAll();
     }
