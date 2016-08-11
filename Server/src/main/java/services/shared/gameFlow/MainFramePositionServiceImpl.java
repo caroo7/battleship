@@ -17,11 +17,15 @@ public class MainFramePositionServiceImpl implements MainFramePositionService {
      */
     @Override
     public Point getProperFrameLocation() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = getScreenSize();
         int widthGapBetweenFrames = (screenSize.width - 2 * Config.MAIN_FRAME_WIDTH) / 3;
         int heightGapBetweenFrames = (screenSize.height - Config.MAIN_FRAME_HEIGHT) / 2;
         frameCounter++;
         return frameCounter == 1 ? new Point(widthGapBetweenFrames, heightGapBetweenFrames) : new Point(2 * widthGapBetweenFrames + Config.MAIN_FRAME_WIDTH, heightGapBetweenFrames);
     }
 
+
+    Dimension getScreenSize() {
+        return Toolkit.getDefaultToolkit().getScreenSize();
+    }
 }
