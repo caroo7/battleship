@@ -1,7 +1,8 @@
-package services.shared;
+package services.shared.players;
 
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import services.shared.players.PlayerRegistrationServiceImpl;
 import services.undisclosed.ActualPlayerServiceImpl;
 
 public class TestPlayerRegistrationService {

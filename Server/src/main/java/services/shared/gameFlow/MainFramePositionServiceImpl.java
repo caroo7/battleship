@@ -1,6 +1,7 @@
-package services.shared;
+package services.shared.gameFlow;
 
 import configuration.Config;
+import services.shared.MainFramePositionService;
 
 import java.awt.*;
 

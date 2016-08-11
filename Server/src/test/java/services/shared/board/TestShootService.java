@@ -1,10 +1,11 @@
-package services.shared;
+package services.shared.board;
 
 import gameLogic.Board;
 import gameLogic.ShipManager;
 import gameLogic.ShipsUtility;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import services.shared.board.ShootServiceImpl;
 import services.undisclosed.ActualPlayerServiceImpl;
 
 import java.awt.*;

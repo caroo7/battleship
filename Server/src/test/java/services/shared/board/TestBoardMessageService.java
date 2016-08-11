@@ -1,4 +1,4 @@
-package services.shared;
+package services.shared.board;
 
 import configuration.ServerConfiguration;
 import gameLogic.Board;
@@ -15,6 +15,9 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import services.shared.BoardsMessageService;
+import services.shared.PlayerRegistrationService;
+import services.shared.ShootService;
 import services.undisclosed.ActualPlayerServiceImpl;
 
 import java.awt.*;

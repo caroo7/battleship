@@ -1,6 +1,8 @@
-package services.shared;
+package services.shared.ships;
 
 import gameLogic.Ship;
+import services.shared.ShipGeneratorService;
+
 import java.awt.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,30 +17,31 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
     /**
      * Generated ships
      */
-    private Set<Ship> ships;
+    Set<Ship> ships;
 
     /**
      * Places where we cannot generate ships (because of already existed ships)
      */
-    private Set<Point> invalidShipsCoordinates;
+    Set<Point> takenShipsCoordinates;
 
-    private final Random random = new Random();
+    final Random random = new Random();
 
     /**
      * Board edge size (e.g. 8 means that board has 8x8 size)
      */
-    private static final int BOARD_SIZE = 8;
+    static final int BOARD_SIZE = 8;
 
     /**
      * It is used during generation phase, before game starts. Creates hardcoded numbers of horizontal and vertical ships randomly.
      * Also add information about places around generated ship (neighbours). It ensures that there will be no ships which adhere together.
      * If ship lays on the border of the board it doesn't allow to add to neighbours points out of the board.
+     *
      * @return created set of ships
      */
     @Override
     public Set<Ship> generateShips() {
         ships = new HashSet<>();
-        invalidShipsCoordinates = new HashSet<>();
+        takenShipsCoordinates = new HashSet<>();
         generateShip(4);
         generateShip(3);
         generateShip(2);
@@ -56,27 +59,29 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
             point = new Point(random.nextInt(BOARD_SIZE), random.nextInt(BOARD_SIZE));
         }
         while (!(random.nextInt(2) == 1 ? generateVerticalShip(point, shipLength) : generateHorizontalShip(point, shipLength)));
-
     }
 
 
-    private boolean generateVerticalShip(Point startPoint, int shipLength) {
-        Point checkCoordinate;
-        Set<Point> shipCoordinates = new HashSet<>();
+    boolean generateVerticalShip(Point startPoint, int shipLength) {
+        if (validatePoint(startPoint.x, startPoint.y)) {
+            Point checkCoordinate;
+            Set<Point> shipCoordinates = new HashSet<>();
 
-        for (int i = startPoint.y; i < startPoint.y + shipLength; i++) {
-            if (i >= BOARD_SIZE) return false;
-            checkCoordinate = new Point(startPoint.x, i);
-            if (invalidShipsCoordinates.contains(checkCoordinate)) return false;
-            else shipCoordinates.add(checkCoordinate);
+            for (int i = startPoint.y; i < startPoint.y + shipLength; i++) {
+                if (i >= BOARD_SIZE) return false;
+                checkCoordinate = new Point(startPoint.x, i);
+                if (takenShipsCoordinates.contains(checkCoordinate)) return false;
+                else shipCoordinates.add(checkCoordinate);
+            }
+            Set<Point> neighbours = generateVerticalShipNeighbours(shipCoordinates, startPoint);
+
+            takenShipsCoordinates.addAll(shipCoordinates);
+            takenShipsCoordinates.addAll(neighbours);
+
+            ships.add(new Ship(shipCoordinates, neighbours));
+            return true;
         }
-        Set<Point> neighbours = generateVerticalShipNeighbours(shipCoordinates, startPoint);
-
-        invalidShipsCoordinates.addAll(shipCoordinates);
-        invalidShipsCoordinates.addAll(neighbours);
-
-        ships.add(new Ship(shipCoordinates, neighbours));
-        return true;
+        return false;
     }
 
     private Set<Point> generateVerticalShipNeighbours(Set<Point> shipCoordinates, Point startPoint) {
@@ -100,25 +105,25 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
                 neighboursCoordinates.add(new Point(point.x + 1, point.y));
             }
         });
-
         return neighboursCoordinates;
     }
 
-    private boolean generateHorizontalShip(Point startPoint, int shipLength) {
+    boolean generateHorizontalShip(Point startPoint, int shipLength) {
+        if (!validatePoint(startPoint.x, startPoint.y)) return false;
         Point checkCoordinate;
         Set<Point> shipCoordinates = new HashSet<>();
 
         for (int i = startPoint.x; i < startPoint.x + shipLength; i++) {
             if (i >= BOARD_SIZE) return false;
             checkCoordinate = new Point(i, startPoint.y);
-            if (invalidShipsCoordinates.contains(checkCoordinate)) return false;
+            if (takenShipsCoordinates.contains(checkCoordinate)) return false;
             else shipCoordinates.add(checkCoordinate);
         }
 
         Set<Point> neighbours = generateHorizontalShipNeighbours(shipCoordinates, startPoint);
 
-        invalidShipsCoordinates.addAll(shipCoordinates);
-        invalidShipsCoordinates.addAll(neighbours);
+        takenShipsCoordinates.addAll(shipCoordinates);
+        takenShipsCoordinates.addAll(neighbours);
 
         ships.add(new Ship(shipCoordinates, neighbours));
         return true;
@@ -144,7 +149,6 @@ public class ShipGeneratorServiceImpl implements ShipGeneratorService {
                 neighboursCoordinates.add(new Point(point.x, point.y + 1));
             }
         });
-
         return neighboursCoordinates;
     }
 

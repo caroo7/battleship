@@ -1,4 +1,6 @@
-package services.shared;
+package services.shared.gameFlow;
+
+import services.shared.EndGameService;
 
 /**
  * Service responsible for immediately application server side close

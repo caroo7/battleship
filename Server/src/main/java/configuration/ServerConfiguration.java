@@ -7,6 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerServiceExporter;
 import org.springframework.remoting.support.SimpleHttpServerFactoryBean;
 import services.shared.*;
+import services.shared.board.BoardsMessageServiceImpl;
+import services.shared.board.ShootServiceImpl;
+import services.shared.gameFlow.EndGameServiceImpl;
+import services.shared.gameFlow.GameInitServiceImpl;
+import services.shared.gameFlow.MainFramePositionServiceImpl;
+import services.shared.players.PlayerRegistrationServiceImpl;
+import services.shared.ships.ShipGeneratorServiceImpl;
 import services.undisclosed.*;
 
 import java.util.HashMap;

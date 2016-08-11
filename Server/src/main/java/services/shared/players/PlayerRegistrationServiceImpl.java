@@ -1,8 +1,9 @@
-package services.shared;
+package services.shared.players;
 
 import exceptions.PlayerRegistrationException;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.PlayerRegistrationService;
 import services.undisclosed.ActualPlayerServiceImpl;
 
 /**

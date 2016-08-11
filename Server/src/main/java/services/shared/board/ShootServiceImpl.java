@@ -1,9 +1,10 @@
-package services.shared;
+package services.shared.board;
 
 import gameLogic.Board;
 import gameLogic.CellState;
 import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.ShootService;
 import services.undisclosed.ActualPlayerServiceImpl;
 
 import java.awt.*;

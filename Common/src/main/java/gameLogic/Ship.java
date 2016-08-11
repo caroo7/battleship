@@ -37,12 +37,11 @@ public class Ship implements Serializable {
         return Collections.unmodifiableSet(coordinates);
     }
 
-    Set<Point> getNeighbours() {
+    public Set<Point> getNeighbours() {
         return Collections.unmodifiableSet(neighbours);
     }
 
     boolean containsPoint(Point point) {
         return coordinates.contains(point);
     }
-
 }

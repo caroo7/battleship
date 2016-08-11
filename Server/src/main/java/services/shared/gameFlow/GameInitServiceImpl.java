@@ -1,9 +1,10 @@
-package services.shared;
+package services.shared.gameFlow;
 
 import gameLogic.Board;
 import models.Player;
 import gameLogic.ShipManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.GameInitService;
 
 /**
  * Responsible for preparing players board when game starts

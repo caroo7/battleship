@@ -7,7 +7,7 @@
     <groupId>github.unsinkable</groupId>
     <artifactId>battleship</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <description>Battleship game for 2 players which contains 3 modules: client, server and common.</description>
     <organization>
         <name>Unsinkable</name>
