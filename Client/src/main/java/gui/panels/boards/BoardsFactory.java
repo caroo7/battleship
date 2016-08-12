@@ -1,0 +1,53 @@
+package gui.panels.boards;
+
+import gui.services.BoardPanelType;
+import models.GameState;
+import gui.services.Publisher;
+import org.springframework.beans.factory.annotation.Autowired;
+import services.shared.BoardsMessageService;
+
+import javax.annotation.PostConstruct;
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+
+public class BoardsFactory {
+
+    @Autowired
+    private BoardsMessageService boardsMessageService;
+
+    @Autowired
+    private UserBoardGui userBoard;
+
+    @Autowired
+    private RivalBoardGui rivalBoard;
+
+    @Autowired
+    private Publisher boardPublisher;
+
+    private final Map<BoardPanelType, JPanel> boards = new HashMap<>();
+
+    /**
+     * set proper boards publishers for panel and after that add user and rival boards to the main panel
+     */
+    @PostConstruct
+    public void boardFactoryInitialize() {
+        initBoardsMap();
+    }
+
+    public JPanel getBoardPanel() {
+        return boards.getOrDefault(BoardPanelType.Playing, new JPanel());
+    }
+
+    private void initBoardsMap() {
+        boards.put(BoardPanelType.Playing, createPlayingBoard());
+    }
+
+    private JPanel createPlayingBoard() {
+        JPanel playingBoard = new JPanel(new GridLayout(1, 2));
+        playingBoard.add(userBoard.addSubscription(boardPublisher).addTitles().setBelowPanel(GameState.NotYourTurn));
+        playingBoard.add(rivalBoard.addSubscription(boardPublisher).addTitles().addListeners());
+        return playingBoard;
+    }
+}

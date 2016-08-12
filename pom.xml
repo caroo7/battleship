@@ -7,7 +7,11 @@
     <groupId>github.unsinkable</groupId>
     <artifactId>battleship</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+    <description>Battleship game for 2 players which contains 3 modules: client, server and common.</description>
+    <organization>
+        <name>Unsinkable</name>
+    </organization>
 
     <modules>
         <module>Client</module>
@@ -19,27 +23,96 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>4.3.1.RELEASE</spring.version>
+        <common.module.version>1.0</common.module.version>
+        <spring.version>4.3.2.RELEASE</spring.version>
+        <testng.version>6.9.10</testng.version>
+        <mockito.version>1.10.19</mockito.version>
+
+        <jacoco.version>0.7.7.201606060606</jacoco.version>
+        <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
+        <datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-    </dependencies>
+
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>main/**/*.class</exclude>
+                        <exclude>**/**/EndGameServiceImpl.class</exclude>
+                        <exclude>**/Player.class</exclude>
+                        <exclude>**/GameState.class</exclude>
+                        <exclude>configuration/**/*.class</exclude>
+                        <exclude>exceptions/**/*.class</exclude>
+                        <exclude>**/ShipsUtilityOnlyForTests.class</exclude>
+                        <exclude>**/CellState.class</exclude>
+
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -15,3 +15,7 @@ info about hit the opponent ship (he had chosen place where opponent has his shi
 ###Goal:
 Purpose of the game is to find all opponent's ships before he does. The person who achieves this goal wins and the game ends. 
 
+
+##Wiki page
+On this page you can find information how to set up and run application. 
+https://github.com/caroo7/battleship/wiki

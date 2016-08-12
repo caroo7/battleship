@@ -7,9 +7,22 @@
     <parent>
         <artifactId>battleship</artifactId>
         <groupId>github.unsinkable</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <artifactId>common</artifactId>
+    <name>Common</name>
+    <description>Module contains common classes necessary for client and server module.</description>
+
+<dependencies>
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+    </dependency>
+</dependencies>
 
 </project>
