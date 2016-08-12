@@ -18,6 +18,7 @@
         <dependency>
             <groupId>github.unsinkable</groupId>
             <artifactId>common</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>

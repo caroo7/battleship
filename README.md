@@ -17,5 +17,5 @@ Purpose of the game is to find all opponent's ships before he does. The person w
 
 
 ##Wiki page
-On this page you can find informations how to set up and run application. 
+On this page you can find information how to set up and run application. 
 https://github.com/caroo7/battleship/wiki
