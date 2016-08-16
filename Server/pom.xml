@@ -7,22 +7,46 @@
     <parent>
         <groupId>github.unsinkable</groupId>
         <artifactId>battleship</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
-
     <artifactId>server</artifactId>
+    <name>Server</name>
+    <description>Server side part on battleship game. Contains services implementations which are responsible for aggregating game logic.</description>
 
     <dependencies>
         <dependency>
             <groupId>github.unsinkable</groupId>
             <artifactId>common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <!-- use 2.5.0 for Java 7 projects -->
+            <version>3.5.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
