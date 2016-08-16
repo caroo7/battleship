@@ -50,7 +50,7 @@ public class ShootServiceImpl implements ShootService {
     /**
      * Responsible for make volley of shots in few random places on the board (if cell status is EMPTY or SHIP).
      * Looking for all places on the chosen board where player can shoot. Randomly select appropriate number of places and always change player at the end.
-     * @param shootNumber - size of volley of shoots. Determine how many free places will be afflicted.
+     * @param shootNumber - size of volley of shots. Determine how many free places will be afflicted.
      */
     @Override
     public void randomShoot(int shootNumber) {
@@ -73,17 +73,17 @@ public class ShootServiceImpl implements ShootService {
         return emptyCells.size() == 0;
     }
 
+    private Map<Point, CellState> retrieveBoardAfterShoot(Point point) {
+        Map<Point, CellState> resultMap = getActualBoardState().representCurrentBoardState();
+        CellState cellState = resultMap.get(point);
+        return (cellState == CellState.EMPTY || cellState == CellState.SHIP) ? getActualBoardState().representBoardStateAfterClickingOn(point) : resultMap;
+    }
+
     private Point getPointToShoot(List<Point> emptyCells) {
         Random random = new Random();
         Point pointToShoot = emptyCells.get(random.nextInt(emptyCells.size()));
         emptyCells.remove(pointToShoot);
         return pointToShoot;
-    }
-
-    private Map<Point, CellState> retrieveBoardAfterShoot(Point point) {
-        Map<Point, CellState> resultMap = getActualBoardState().representCurrentBoardState();
-        CellState cellState = resultMap.get(point);
-        return (cellState == CellState.EMPTY || cellState == CellState.SHIP) ? getActualBoardState().representBoardStateAfterClickingOn(point) : resultMap;
     }
 
     private Board getActualBoardState() {
