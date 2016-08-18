@@ -90,66 +90,45 @@ public class ClientConfiguration {
 
     @Bean
     public HttpInvokerProxyFactoryBean shipGeneratorHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.SHIP_GENERATOR_SERVICE;
-        httpInvoker.setServiceInterface(ShipGeneratorService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
+        return createAppropriateProxyFactoryBean(Config.SHIP_GENERATOR_SERVICE, ShipGeneratorService.class);
     }
 
     @Bean
     public HttpInvokerProxyFactoryBean boardMessageHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.BOARD_MESSAGE_SERVICE;
-        httpInvoker.setServiceInterface(BoardsMessageService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
+        return createAppropriateProxyFactoryBean(Config.BOARD_MESSAGE_SERVICE, BoardsMessageService.class);
     }
 
     @Bean
     public HttpInvokerProxyFactoryBean playerRegistrationHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.PLAYER_REGISTRATION_SERVICE;
-        httpInvoker.setServiceInterface(PlayerRegistrationService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
+        return createAppropriateProxyFactoryBean(Config.PLAYER_REGISTRATION_SERVICE, PlayerRegistrationService.class);
     }
 
     @Bean
     public HttpInvokerProxyFactoryBean gameInitHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.GAME_INIT_SERVICE;
-        httpInvoker.setServiceInterface(GameInitService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
+        return createAppropriateProxyFactoryBean(Config.GAME_INIT_SERVICE, GameInitService.class);
     }
 
     @Bean
     public HttpInvokerProxyFactoryBean shootServiceHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.SHOOT_SERVICE;
-        httpInvoker.setServiceInterface(ShootService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
+        return createAppropriateProxyFactoryBean(Config.SHOOT_SERVICE, ShootService.class);
     }
 
     @Bean
     public HttpInvokerProxyFactoryBean endGameServiceHttpInvokerProxyFactoryBean() {
-        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.END_GAME_SERVICE;
-        httpInvoker.setServiceInterface(EndGameService.class);
-        httpInvoker.setServiceUrl(serviceURL);
-        return httpInvoker;
+        return createAppropriateProxyFactoryBean(Config.END_GAME_SERVICE, EndGameService.class);
     }
 
     @Bean
     public HttpInvokerProxyFactoryBean mainFramePositionServiceHttpInvokerProxyFactoryBean() {
+        return createAppropriateProxyFactoryBean(Config.MAIN_FRAME_POSITION_SERVICE, MainFramePositionService.class);
+    }
+
+    private HttpInvokerProxyFactoryBean createAppropriateProxyFactoryBean(String serviceName, Class serviceClass) {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
-        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + Config.MAIN_FRAME_POSITION_SERVICE;
-        httpInvoker.setServiceInterface(MainFramePositionService.class);
+        String serviceURL = "http://" + environment.getRequiredProperty("host_name") + ":" + Config.SERVER_PORT + serviceName;
+        httpInvoker.setServiceInterface(serviceClass);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
-
 
 }

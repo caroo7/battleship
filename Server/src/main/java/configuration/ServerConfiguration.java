@@ -42,57 +42,44 @@ public class ServerConfiguration {
 
     @Bean
     public SimpleHttpInvokerServiceExporter boardMessageHttpInvokerServiceExporter() {
-        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(BoardsMessageService.class);
-        simpleHttpInvokerServiceExporter.setService(boardMessageService());
-        return simpleHttpInvokerServiceExporter;
+        return prepareAppropriateServiceHttpInvokerServiceExporter(BoardsMessageService.class, boardMessageService());
     }
 
     @Bean
     public SimpleHttpInvokerServiceExporter playerRegistrationHttpInvokerServiceExporter() {
-        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(PlayerRegistrationService.class);
-        simpleHttpInvokerServiceExporter.setService(playerRegistrationService());
-        return simpleHttpInvokerServiceExporter;
+        return prepareAppropriateServiceHttpInvokerServiceExporter(PlayerRegistrationService.class, playerRegistrationService());
     }
 
     @Bean
     public SimpleHttpInvokerServiceExporter shipGeneratorHttpInvokerServiceExporter() {
-        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(ShipGeneratorService.class);
-        simpleHttpInvokerServiceExporter.setService(shipGeneratorService());
-        return simpleHttpInvokerServiceExporter;
+        return prepareAppropriateServiceHttpInvokerServiceExporter(ShipGeneratorService.class, shipGeneratorService());
     }
 
     @Bean
     public SimpleHttpInvokerServiceExporter gameInitHttpInvokerServiceExporter() {
-        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(GameInitService.class);
-        simpleHttpInvokerServiceExporter.setService(gameInitService());
-        return simpleHttpInvokerServiceExporter;
+        return prepareAppropriateServiceHttpInvokerServiceExporter(GameInitService.class, gameInitService());
     }
 
     @Bean
     public SimpleHttpInvokerServiceExporter shootServiceHttpInvokerServiceExporter() {
-        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(ShootService.class);
-        simpleHttpInvokerServiceExporter.setService(shootService());
-        return simpleHttpInvokerServiceExporter;
+        return prepareAppropriateServiceHttpInvokerServiceExporter(ShootService.class, shootService());
     }
 
     @Bean
     public SimpleHttpInvokerServiceExporter endGameServiceHttpInvokerServiceExporter() {
-        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(EndGameService.class);
-        simpleHttpInvokerServiceExporter.setService(endGameService());
-        return simpleHttpInvokerServiceExporter;
+        return prepareAppropriateServiceHttpInvokerServiceExporter(EndGameService.class, endGameService());
     }
+
 
     @Bean
     public SimpleHttpInvokerServiceExporter mainFramePositionServiceHttpInvokerServiceExporter() {
+        return prepareAppropriateServiceHttpInvokerServiceExporter(MainFramePositionService.class, mainFramePositionService());
+    }
+
+    private SimpleHttpInvokerServiceExporter prepareAppropriateServiceHttpInvokerServiceExporter(Class serviceClass, Object serviceImpl) {
         SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
-        simpleHttpInvokerServiceExporter.setServiceInterface(MainFramePositionService.class);
-        simpleHttpInvokerServiceExporter.setService(mainFramePositionService());
+        simpleHttpInvokerServiceExporter.setServiceInterface(serviceClass);
+        simpleHttpInvokerServiceExporter.setService(serviceImpl);
         return simpleHttpInvokerServiceExporter;
     }
 
