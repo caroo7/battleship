@@ -6,7 +6,7 @@ Battleship game
 2 players play from same computer or different computers in the same Local Area Network.
 
 ###Content: 
-Each player sees a window/frame with two 10x10 places boards (for himself and for opponent) with ships, a bunch of hit and miss markers and empty places.
+Each player sees a window/frame with two 8x8 places boards (for himself and for opponent) with ships, a bunch of hit and miss markers and empty places.
 
 ###When player tries to shoot he will receive different kind of information:
 info that he chose empty place on opponent board (missed) - in this case opponent gets his move and he has to wait.
